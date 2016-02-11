@@ -1,0 +1,20 @@
+nbproject/
+*.volt.php
+/app/config/configuration.ini
+/app/logs/debug.log
+/tmp/ifiles/*
+/tmp/ifiles/
+/app/logs/bgdbdebug.log
+/app/logs/bgprocess.log
+/public/assets/
+/app/views/templates/index_2.volt%%e%%.php
+/app/views/templates/index_1.volt%%e%%.php
+/extra-files/Library/exporting-server/java/highcharts-export/highcharts-export-convert/target/
+/extra-files/Library/exporting-server/java/highcharts-export/highcharts-export-web/target/
+/public/vendors/highcharts-4.0.4/exporting-server/java/highcharts-export/highcharts-export-convert/target/
+/public/vendors/highcharts-4.0.4/exporting-server/java/highcharts-export/highcharts-export-web/target/
+/public/tmp/
+/app/databases/1/~$SILAR 1.xlsx
+/app/databases/1/
+/app/databases/
+/public/image-bank/system/app/

@@ -1,0 +1,61 @@
+.out-container { 
+	width: 100%; 
+	padding: 1%; 
+	background: #eee; 
+	min-height: 10em; 
+}
+.out.custom-state-active { 
+	background: #eee; 
+}
+
+.out li { 
+	cursor: move;
+	width: 96px; 
+	padding: 0.4em 0.4em 11px 0.4em; 
+}
+
+.in { 
+	width: 100%; 
+	min-height: 10em; 
+	padding: 1%; 
+}
+
+.in li { 
+	z-index: 99999999;
+	cursor: move;
+	width: 96px; 
+	padding: 0.4em 0.4em 11px 0.4em; 
+}
+
+.big {
+	padding: 5px 10px 5px 10px;
+	font-size: 1em;
+	font-weight: 200 !important;
+	border-radius: 1px !important;
+}
+
+.remove-item {
+	z-index: 99999999999999999;
+	cursor: pointer;
+}
+
+.remove-item:hover {
+	color: #FF5550;
+}
+
+.set-time {
+	z-index: 99999999999999999;
+	cursor: pointer;
+}
+
+.set-time:hover {
+	color: #337ab7;
+}
+
+#startDate {
+	padding-right: 6px;
+}
+
+#endDate {
+	padding-right: 20px;
+}

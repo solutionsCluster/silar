@@ -1,0 +1,86 @@
+/* 
+    Document   : sidebar-media-queries
+    Created on : 08/10/2014, 10:54:05 PM
+    Author     : Will
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@media (min-width: 768px) and (max-width: 1080px) {
+
+}	
+
+@media (min-width: 601px) and (max-width: 720px) {
+	.principal-image {
+		width: 180px;
+		height: 250px;
+	}
+
+	.panel-sidebar {
+		width: 30%;
+	}
+
+	.panel-content {
+		width: 70%;
+	}	
+
+	.app-logo {
+		width: 140px;
+		height: 40px;
+	}
+
+	.client-logo{
+		width: 140px;	
+		height: 40px;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 600px) {
+	.panel-sidebar {
+		display: none;
+	}
+
+	.panel-content {
+		width: 100%;
+	}	
+}
+
+
+@media (min-width: 401px) and (max-width: 480px) {  
+	.panel-sidebar {
+		display: none;
+	}
+
+	.panel-content {
+		width: 100%;
+	}
+
+	.app-logo {
+		width: 140px;
+		height: 40px;
+	}
+
+	.client-logo{
+		width: 140px;	
+		height: 40px;
+	}
+}
+
+@media (max-width: 400px) {
+	.panel-sidebar {
+		display: none;
+	}
+
+	.panel-content {
+		width: 100%;
+	}
+
+	.app-logo {
+		width: 120px;
+		height: 30px;
+	}
+
+	.client-logo{
+		width: 120px;	
+		height: 30px;
+	}
+}
