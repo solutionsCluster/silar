@@ -24,7 +24,8 @@ class PermissionsDataBase
 	{
 		$this->roles = array(
 			'sudo' => 1,
-			'admin' => 2
+			'admin' => 2,
+			'basic' => 3
 		);
 	}
 	
@@ -42,6 +43,7 @@ class PermissionsDataBase
 			'role' => 9,
 			'action' => 10,
 			'resource' => 11,
+			'system' => 12
 		);
 	}
 	
@@ -99,13 +101,16 @@ class PermissionsDataBase
 			'resource::read' => 39,
 			'resource::update' => 40,
 			'resource::delete' => 41,
+			
+			'system::read' => 42,
+			'system::config' => 43,
 		);
 	}
 	
 	public function loadAllowed()
 	{
 		$this->allowed = array(
-//			----------//----------**ROLE_SUDO**----------//----------
+//			----------//----------**sudo**----------//----------
 			array( 'Role' => 'sudo', 'Action' => 'user::create'),
 			array( 'Role' => 'sudo', 'Action' => 'user::read'),
 			array( 'Role' => 'sudo', 'Action' => 'user::update'),
@@ -158,8 +163,11 @@ class PermissionsDataBase
 			array( 'Role' => 'sudo', 'Action' => 'resource::update'),
 			array( 'Role' => 'sudo', 'Action' => 'resource::delete'),
 			
+			array( 'Role' => 'sudo', 'Action' => 'system::read'),
+			array( 'Role' => 'sudo', 'Action' => 'system::config'),
 			
-//			----------//----------**ROLE_ADMIN**----------//----------
+			
+//			----------//----------**admin**----------//----------
 			array( 'Role' => 'admin', 'Action' => 'user::create'),
 			array( 'Role' => 'admin', 'Action' => 'user::read'),
 			array( 'Role' => 'admin', 'Action' => 'user::update'),
@@ -167,12 +175,18 @@ class PermissionsDataBase
 		
 			array( 'Role' => 'admin', 'Action' => 'dashboard::read'),
 			
-			array( 'Role' => 'admin', 'Action' => 'report::create'),
 			array( 'Role' => 'admin', 'Action' => 'report::read'),
-			array( 'Role' => 'admin', 'Action' => 'report::update'),
-			array( 'Role' => 'admin', 'Action' => 'report::delete'),
 			array( 'Role' => 'admin', 'Action' => 'report::getdata'),
 			array( 'Role' => 'admin', 'Action' => 'report::download'),
+			
+//			----------//----------**basic**----------//----------
+			array( 'Role' => 'basic', 'Action' => 'user::update'),
+		
+			array( 'Role' => 'basic', 'Action' => 'dashboard::read'),
+			
+			array( 'Role' => 'basic', 'Action' => 'report::read'),
+			array( 'Role' => 'basic', 'Action' => 'report::getdata'),
+			array( 'Role' => 'basic', 'Action' => 'report::download'),			
 		);
 		
 	}

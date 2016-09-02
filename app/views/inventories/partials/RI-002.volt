@@ -1,10 +1,10 @@
 {% if index is not defined%}
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="padding-top: 8px">
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="padding-top: 8px">
         <input type="text" id="branch" class="select2" />
     </div>
     
-	<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="padding-top: 8px">
+	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3" style="padding-top: 8px">
 		<select id="cant" name="cant" class="select2">
 			<option value="10" selected>10 Productos más vendidos</option>
 			<option value="20">20 Productos más vendidos</option>
@@ -12,7 +12,6 @@
 			<option value="200">200 Productos más vendidos</option>
 			<option value="500">500 Productos más vendidos</option>
 			<option value="1000">1000 Productos más vendidos</option>
-			<option value="5000">5000 Productos más vendidos</option>
 		</select> 
 	</div>	
 		
@@ -79,19 +78,19 @@
 				$("#year").select2({
 					data: data
 				}).select2('val', {{year}});
-			});
-
-			$.getJSON('{{url('filter/getmonths')}}', function(data) {
-				$("#month").select2({
-					data: data
-				}).select2('val', {{month}});
-			});
-
-			$.getJSON('{{url('filter/getbranches')}}', function(data) {
-				$("#branch").select2({
-					data: data
-				}).select2('val', 'all');
-				refresh();
+				
+				$.getJSON('{{url('filter/getmonths')}}', function(data) {
+					$("#month").select2({
+						data: data
+					}).select2('val', {{month}});
+					
+					$.getJSON('{{url('filter/getbranches')}}', function(data) {
+						$("#branch").select2({
+							data: data
+						}).select2('val', 'all');
+						refresh();
+					});
+				});
 			});
 		});
 	{% else %}
@@ -131,9 +130,17 @@
             success: function(data){
                 $('#{{report.idReport}}').children().fadeOut(500, function() {
                     $('#{{report.idReport}}').empty();
-                        var total = convertObjectInArray(data.data.total);
-						var products = convertObjectInArray(data.data.products);
-						var title = {% if index is not defined%}'{{report.name}}'{% else %}''{% endif %};
+					var title = {% if index is not defined%}'{{report.name}}'{% else %}''{% endif %};
+					var total = convertObjectInArray(data.data.total);
+					var products = convertObjectInArray(data.data.products);
+					if (total.length == 0 || products.length == 0) {
+					$('#{{report.idReport}}').append('<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">\n\
+														<div class="alert alert-warning">\n\
+															No existen datos con los filtros seleccionados\n\
+														</div>\n\
+													  </div>');
+					}
+					else {
 						createBasicBar({
 							container: {{report.idReport}},
 							title: title,
@@ -146,40 +153,40 @@
 								data: total
 							}]
 						});
+					}
                 });
             }
         });
     }
 	
 	function createObject() {
-	{% if index is not defined%}
-		var filter = $('#filter').val();
-		var m = $('#month').val();
-		var branch = $('#branch').val();
-		var cant = $('#cant').val();;
-		var month = pad(m, 2);
-		var year = $('#year').val();
-		var title = month + '/' + year;
-	{% else %}
 		var filter = $('#filter').val();
 		var m = {{month}};
 		var branch = 'all';
 		var cant = 10;
 		var month = pad(m, 2);
 		var year = {{year}};
-		var title = month + '/' + year;
+	{% if index is not defined%}
+		m = $('#month').val();
+		branch = $('#branch').val();
+		cant = $('#cant').val();;
+		month = pad(m, 2);
+		year = $('#year').val();
 	{% endif %}
 	
 		var object = {
 			idReport: {{report.idReport}},
 			filter: filter,
 			cant: cant,
-			module: 'inventories',
+			module: '{{report.module}}',
 			year: year,
 			month: month,
 			branch: branch,
-			title: title
+			title: month + '/' + year
 		};
+		
+		var height = (cant == 10 || cant == 20 ? cant*40: cant*20);
+		adjustChartContainer({container: '{{report.idReport}}', height: height});
 		
 		return object;
 	}	

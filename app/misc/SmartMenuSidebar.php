@@ -10,7 +10,7 @@ class SmartMenuSidebar extends \Phalcon\Mvc\User\Component implements \Iterator
         "Inicio" => array(
             "controller" => array("index"),
             "class" => "",
-            "url" => "index",
+            "url" => "/",
             "arrow" => "",
             "title" => "Inicio",
             "icon" => "glyphicon glyphicon-home",
@@ -31,7 +31,7 @@ class SmartMenuSidebar extends \Phalcon\Mvc\User\Component implements \Iterator
                 array("controller" => array("inventories"),
                 "class" => "",
                 "url" => "inventories",
-                "title" => "Inventarios",
+                "title" => "Productos",
                 "icon" => ""),
                 
                 array("controller" => array("sales"),

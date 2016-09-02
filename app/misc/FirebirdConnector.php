@@ -23,9 +23,16 @@ class FirebirdConnector {
     }
 
     public function openConnection() {
-        $database = "{$this->firebird->host}:{$this->path->path}{$this->firebird->dir}{$this->account->idAccount}/{$this->account->idAccount}.FDB";
-        $this->connection = \ibase_connect($database, $this->firebird->username, $this->firebird->password);
 
+        $database = "{$this->firebird->host}/{$this->account->firebird->port}:{$this->path->path}{$this->firebird->dir}{$this->account->idAccount}/{$this->account->idAccount}.FDB"; //die($database);
+//$database = "{$this->firebird->host}{$this->path->path}{$this->firebird->dir}{$this->account->idAccount}/{$this->account->idAccount}.FDB";
+//print($database); die();
+//$database="190.147.164.82/8080:/home/silar/app/databases/{$this->account->idAccount}/{$this->account->idAccount}.FDB";
+        $this->logger->log("Database: {$database}");
+        $this->logger->log("Username: {$this->firebird->username}");
+        $this->logger->log("Password: {$this->firebird->password}");
+//die($database);
+        $this->connection = \ibase_connect($database, $this->firebird->username, $this->firebird->password);
         if (!$this->connection) {
             throw new \Exception("Acceso denegado");
         }
@@ -40,7 +47,7 @@ class FirebirdConnector {
     }
 
     public function executeQuery($sql) {
-        try {
+        try { 
             $this->openConnection();
 
             $this->rtemp = ibase_query($this->connection, $sql);

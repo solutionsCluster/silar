@@ -7,13 +7,31 @@ use Phalcon\Forms\Form,
     
 
 class UserForm extends Form
-{
-    public function initialize()
+{	
+	public function initialize($user, $thuser)
     {
-        $this->add(new Select('idRole', Role::find(), array(
-            'using' => array('idRole', 'name'),
-            'class' => 'select2'
-        )));
+		$roles = Role::find();
+		$r = array();
+		if ($thuser->idRole == 1) {
+			foreach ($roles as $rol) {
+				$r[$rol->idRole] = $rol->name;
+			}
+		}
+		else {
+			foreach ($roles as $rol) {
+				if ($rol->name != 'sudo') {
+					$r[$rol->idRole] = $rol->name; 
+				}
+			}
+		}
+		
+		$this->add(new Select('idRole', 
+			$r, 
+			array(
+				'required' => 'required',
+				'class' => 'select2 select'
+			)
+		));
         
         $this->add(new Check('status', array(
             'type' => 'checkbox',

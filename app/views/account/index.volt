@@ -48,11 +48,7 @@
                                 </a>
                             </div>
                             <div class="block-detail">
-                                {% for ciuu in ciuus %}
-                                    {% if ciuu.idCiuu == item.idCiuu %}
-                                        {{ciuu.description}}
-                                    {% endif %}
-                                {% endfor %}
+								{{item.ciuu.description}}	
                             </div>
                             <div class="block-detail">
                                 {% if item.status == 1%}
@@ -109,19 +105,19 @@
                             <tbody>
                                 <tr>
                                     <td>Ciudad: </td>
-                                    <td>{{item.city}}</td>
+                                    <td><span class="lighter-medium">{{item.city}}</span></td>
                                 </tr>
                                 <tr>
                                     <td>Dirección:</td>
-                                    <td>{{item.address}}</td>
+                                    <td><span class="lighter-medium">{{item.address}}</span></td>
                                 </tr>
                                 <tr>
                                     <td>Telefono:</td>
-                                    <td>{{item.phone}}</td>
+                                    <td><span class="lighter-medium">{{item.phone}}</span></td>
                                 </tr>
                                 <tr>
                                     <td>Correo corporativo:</td>
-                                    <td>{{item.email}}</td>
+                                    <td><span class="lighter-medium">{{item.email}}</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -132,15 +128,19 @@
                             <tbody>
                                 <tr>
                                     <td>Fax:</td>
-                                    <td>{{item.fax}}</td>
+                                    <td><span class="lighter-medium">{{item.fax}}</span></td>
+                                </tr>
+								<tr>
+                                    <td>Base de datos:</td>
+                                    <td><span class="lighter-medium">{{item.database}} / Versión {{item.firebird.version}}</span></td>
                                 </tr>
                                 <tr>
                                     <td>Creada el:</td>
-                                    <td>{{date('d/M/Y H:i', item.created)}}</td>
+                                    <td><span class="lighter-medium">{{date('d/M/Y H:i', item.created)}}</span></td>
                                 </tr>
                                 <tr>
                                     <td>Última actualización:</td>
-                                    <td>{{date('d/M/Y H:i', item.updated)}}</td>
+                                    <td><span class="lighter-medium">{{date('d/M/Y H:i', item.updated)}}</span></td>
                                 </tr>
                             </tbody>
                         </table>

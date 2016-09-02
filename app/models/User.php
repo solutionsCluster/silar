@@ -87,7 +87,7 @@ class User extends ModelBase
 
         $this->validate(new Uniqueness(array(
              "field"   => "userName",
-             "message" => "Nombre de usuario inválido, verifique la información"
+             "message" => "*Nombre de usuario inválido, verifique la información"
         )));
 
         return $this->validationHasFailed() != true;

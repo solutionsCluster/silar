@@ -8,7 +8,9 @@ class AccountController extends ControllerBase
 
         $builder = $this->modelsManager->createBuilder()
                 ->from('Account')
-                ->orderBy('created');
+				->join('Firebird', 'Firebird.idFirebird = Account.idFirebird')
+				->join('Ciuu', 'Ciuu.idCiuu = Account.idCiuu')
+                ->orderBy('Account.created');
 
         $paginator = new Phalcon\Paginator\Adapter\QueryBuilder(array(
                 "builder" => $builder,
@@ -17,14 +19,7 @@ class AccountController extends ControllerBase
         ));
 
         $page = $paginator->getPaginate();
-
         $this->view->setVar("page", $page);
-
-        $ciuus = Ciuu::find();
-        $payments = Paymentplan::find();
-
-        $this->view->setVar('ciuus', $ciuus);
-        $this->view->setVar('payments', $payments);
     }
 
     public function newAction()
@@ -32,7 +27,7 @@ class AccountController extends ControllerBase
         $account = new Account();
         $user = new User();
         $aform = new AccountForm($account);
-        $uform = new UserForm($user);
+		$uform = new UserForm($user, $this->user);
 
         if ($this->request->isPost()) {
             $aform->bind($this->request->getPost(), $account);
@@ -124,7 +119,7 @@ class AccountController extends ControllerBase
 	
     public function showusersAction($id)
     {
-        $account = Account::findFirst(array(
+       $account = Account::findFirst(array(
             'conditions' => 'idAccount = ?1',
             'bind' => array(1 => $id)
         ));
@@ -179,7 +174,7 @@ class AccountController extends ControllerBase
         
         $this->view->setVar('user', $user);
         $this->view->setVar('account', $account);
-        $form = new UserForm($user);
+        $form = new UserForm($user, $this->user);
         
         if ($this->request->isPost()) {   
             $form->bind($this->request->getPost(), $user);
@@ -306,7 +301,7 @@ class AccountController extends ControllerBase
         }
         
         $user = new User();
-        $form = new UserForm($user);
+        $form = new UserForm($user, $this->user);
 
         if ($this->request->isPost()) {
             $form->bind($this->request->getPost(), $user);
@@ -363,7 +358,7 @@ class AccountController extends ControllerBase
 		
 		$payments = array();
 		try {
-            $sql = "SELECT p.idPaymentplan AS id, p.name AS name, a.start AS start, a.end AS end, a.status AS status
+            $sql = "SELECT p.idPaymentplan AS id, p.name AS name, 'a.start' AS inicio, 'a.end' AS fin, a.status AS status
 					FROM Pxa AS a
 						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
 					WHERE a.idAccount = :id:";
@@ -377,8 +372,8 @@ class AccountController extends ControllerBase
 					$obj = new stdClass();
 					$obj->id = $value->id;
 					$obj->name = $value->name;
-					$obj->start = date('d/m/Y H:m', $value->start);
-					$obj->end = date('d/m/Y H:m', $value->end);
+					$obj->inicio = date('d/m/Y H:m', $value->inicio);
+					$obj->fin = date('d/m/Y H:m', $value->fin);
 					$obj->status = $value->status;
 					
 					$payments[] = $obj;

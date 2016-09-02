@@ -58,19 +58,19 @@
 				$("#year").select2({
 					data: data
 				}).select2('val', {{year}});
-			});
-
-			$.getJSON('{{url('filter/getmonths')}}', function(data) {
-				$("#month").select2({
-					data: data
-				}).select2('val', {{month}});
-			});
-
-			$.getJSON('{{url('filter/getbranches')}}', function(data) {
-				$("#branch").select2({
-					data: data
-				}).select2('val', 'all');
-				refresh();
+				
+				$.getJSON('{{url('filter/getmonths')}}', function(data) {
+					$("#month").select2({
+						data: data
+					}).select2('val', {{month}});
+					
+					$.getJSON('{{url('filter/getbranches')}}', function(data) {
+						$("#branch").select2({
+							data: data
+						}).select2('val', 'all');
+						refresh();
+					});
+				});
 			});
 		});
 	{% else %}
@@ -119,7 +119,7 @@
                             x: ['01', '02', '03', '04', '05', '06','07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
                             y: 'Pesos colombianos($)',
                             data: [{
-                                name: 'Ventas',
+                                name: 'Cartera',
                                 data: array,
 								negativeColor: '#FF1300',
                             }]
@@ -130,30 +130,26 @@
     }
 	
 	function createObject() {
-	{% if index is not defined%}
-		var filter = $('#filter').val();
-		var m = $('#month').val();
-		var branch = $('#branch').val();
-		var month = pad(m, 2);
-		var year = $('#year').val();
-		var title = month + '/' + year;
-	{% else %}
 		var filter = $('#filter').val();
 		var m = {{month}};
 		var branch = 'all';
 		var month = pad(m, 2);
 		var year = {{year}};
-		var title = month + '/' + year;
+	{% if index is not defined%}
+		m = $('#month').val();
+		branch = $('#branch').val();
+		month = pad(m, 2);
+		year = $('#year').val();
 	{% endif %}
 	
 		var object = {
 			idReport: {{report.idReport}},
 			filter: filter,
-			module: 'portfolio',
+			module: '{{report.module}}',
 			year: year,
 			month: month,
 			branch: branch,
-			title: title
+			title: month + '/' + year
 		};
 		
 		return object;

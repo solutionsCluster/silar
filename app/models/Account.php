@@ -12,6 +12,7 @@ class Account extends ModelBase
 {
     public $idAccount;
     public $idCiuu;
+    public $idFirebird;
 	
     public function initialize()
     {
@@ -22,6 +23,10 @@ class Account extends ModelBase
         $this->hasMany("idAccount", "Tmpreport","idAccount");
 
         $this->belongsTo("idCiuu", "Ciuu", "idCiuu", array(
+            "foreignKey" => true,
+        ));
+		
+		$this->belongsTo("idFirebird", "Firebird", "idFirebird", array(
             "foreignKey" => true,
         ));
     }

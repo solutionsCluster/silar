@@ -61,23 +61,23 @@
 			$("#year1").select2({
 				data: data
 			}).select2('val', year2);
-		});
-
-		$.getJSON('{{url('filter/getbranches')}}', function(data) {
-			$("#branch").select2({
-				data: data
-			}).select2('val', 'all');
-			refresh();
+			
+			$.getJSON('{{url('filter/getbranches')}}', function(data) {
+				$("#branch").select2({
+					data: data
+				}).select2('val', 'all');
+				refresh();
+			});
 		});
     });
     
     function refresh() {
-        var obj = createObject();
+        var obj = createObject(false);
         getData{{report.idReport}}(obj);
     }
    
 	function downloadReport() {
-		var obj = createObject();
+		var obj = createObject(true);
 		createReport(obj);
 	}
 		
@@ -90,7 +90,16 @@
             type: "POST",			
             data: {object: object},
             error: function(data){
-                $.gritter.add({class_name: 'gritter-error', title: '<i class="glyphicon glyphicon-exclamation-sign"></i> Error', text: data.responseJSON.message, sticky: false, time: 6000});
+                var notification = new NotificationFx({
+					wrapper : document.body,
+					message : '<p>' + data.responseJSON.message + '</p>',
+					layout : 'growl',
+					effect : 'slide',
+					ttl : 15000,
+					type : 'error'
+				});
+				// show the notification
+				notification.show();
             },
             success: function(data){
                 $('#{{report.idReport}}').children().fadeOut(500, function() {
@@ -119,27 +128,29 @@
         });
     }
 	
-	function createObject() {
-	{% set year = date('Y')%}
-	{% if index is not defined%}
-		var year1 = $('#year1').val();
-		var year2 = $('#year2').val();
-		var branch = $('#branch').val();
-        var filter = $('#filter').val();
-	{% else %}
+	function createObject(variable) {
+		var download = (variable ? 'true' : 'false');
 		var year1 = {{year}} - 1;
 		var year2 = {{year}};
 		var branch = "all";
         var filter = 'daily';
+	{% set year = date('Y')%}
+	{% if index is not defined%}
+		year1 = $('#year1').val();
+		year2 = $('#year2').val();
+		branch = $('#branch').val();
+        filter = $('#filter').val();
 	{% endif %}
+		filter = (variable ? 'accumulated' : filter);
 		var obj = {
 			idReport: {{report.idReport}},
-			module: 'sales',
+			module: '{{report.module}}',
 			year1: year1,
 			year2: year2,
 			branch: branch,
 			title: year1 + ' y ' + year2,
-			filter: filter
+			filter: filter,
+			download: download
 		};
 		
 		return obj;

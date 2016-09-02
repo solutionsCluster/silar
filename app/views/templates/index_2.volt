@@ -6,20 +6,19 @@
         <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=1">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800">
 		<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,200,300' rel='stylesheet' type='text/css'>
-        {#
-        <link rel="shortcut icon" type="image/x-icon" href="{{url('')}}images/favicon48x48.ico">
-        #}
+        <link rel="shortcut icon" type="image/x-icon" href="{{url('')}}images/favicon.ico">
+		
         <!-- Always force latest IE rendering engine or request Chrome Frame -->
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 
         {{ get_title() }}
         {{ javascript_include('js/jquery-1.11.1.min.js') }}
         {{ stylesheet_link('css/adjustments.css') }}
-        {{ stylesheet_link('bootstrap-3.2.0/css/bootstrap.min.css') }}
-        {{ javascript_include('bootstrap-3.2.0/js/bootstrap.min.js') }}
+        {{ stylesheet_link('bootstrap-3.3.2/css/bootstrap.min.css') }}
+        {{ javascript_include('bootstrap-3.3.2/js/bootstrap.min.js') }}
         {# Para cambiar el tema modificar la ruta en el siguiente enlace #}
         {#{{ stylesheet_link('bootstrap-3.2.0/css/bootstrap-theme.min.css') }}#}
-
+		{{ stylesheet_link('css/general-media-queries.css') }}
         {% block header %}{% endblock %}
         
         <script type="text/javascript">
@@ -51,10 +50,15 @@
             
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right user-options" style="background-color: #428bca !important;">
+				{% if userefective.enable %}
+					<li style="background-color: #f0ad4e !important;">
+						<a href="{{url('session/logoutfromroot')}}">Volver a la sesión original </a>
+					</li>
+				{% endif %}
                     <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{userObject.name}} {{userObject.lastName}} <span class="caret"></span></a>
                         <ul class="dropdown-menu options-open" role="menu">
-                            <li><a href="{{url('user/edit')}}">Perfil</a></li>
+                            <li><a href="{{url('user/editprofile')}}">Perfil</a></li>
                             <li><a href="{{url('session/logout')}}">Cerrar sesión</a></li>
                         </ul>
                     </li>

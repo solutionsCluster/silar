@@ -4,8 +4,8 @@
     <div class="row">
         <div class="col-xs-12 col-sm-4 col-sm-offset-4 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
             <div class="logo-page-error">
-                <a href="http://www.i7group.com/" target="_blank">
-                    <img src="{{url('')}}image-bank/silar-logo.jpg" class="app-logo" style="margin-bottom: 10px;"/>
+                <a href="http://solutionscluster.net/" target="_blank">
+                    <img src="{{url('')}}{{imgbnk.relativeappimages}}/app-logo.png" class="app-logo" style="margin-bottom: 10px;"/>
                 </a>
             </div>
         </div>

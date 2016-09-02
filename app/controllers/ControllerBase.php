@@ -29,8 +29,8 @@ class ControllerBase extends \Phalcon\Mvc\Controller
             $this->response->setStatusCode($status, $message);
         }
         
-        if (is_array($content)) {
-            $content = json_encode($content);
+        if (is_array($content)) {// print('1..');
+            $content = json_encode($content);// print_r($content); die();
         }
         
         $this->response->setContent($content);
@@ -76,13 +76,14 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 	
 	public function getAllAvailableReports($object)
 	{
-		$sql = "SELECT DISTINCT r.idReport AS idReport, r.name AS name, r.description AS description, r.code AS code
+           /*
+		$sql = "SELECT DISTINCT r.idReport AS idReport, r.name AS name, r.module, r.description AS description, r.code AS code
 				FROM Pxa AS pa
 					JOIN Pxr AS pr ON (pr.idPaymentplan = pa.idPaymentplan)
 					JOIN Report AS r ON (r.idReport = pr.idReport)
 				WHERE pa.idAccount = :idAccount: 
-					AND pa.start <= :time: 
-					AND pa.end >= :time:
+					AND 'pa.start' <= :time: 
+					AND 'pa.end' >= :time:
 					AND pa.status = :status:";
 		
 		$query = $this->modelsManager->createQuery($sql);
@@ -92,19 +93,46 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 			'time' => time(),
 			'status' => $object->status,
 		));
+           */
+
+$sql = "SELECT DISTINCT r.idReport AS idReport, r.name AS name, r.module, r.description AS description, r.code AS code
+			FROM pxa AS pa
+					JOIN pxr AS pr ON (pr.idPaymentplan = pa.idPaymentplan)
+					JOIN report AS r ON (r.idReport = pr.idReport)
+			WHERE pa.idAccount = {$object->idAccount}
+					AND pa.start <= " . time() . "
+					AND pa.end >= " . time() . "
+					AND pa.status = '{$object->status}'";
+
+				
+	$result = $this->db->query($sql);
+	$reports = $result->fetchAll();
+	
+	$r = array();
+	foreach($reports as $report) {
+		$obj = new stdClass();
+		$obj->idReport = $report['idReport'];
+		$obj->name = $report['name'];
+		$obj->module = $report['module'];
+		$obj->description = $report['description'];
+		$obj->code = $report['code'];
 		
-		return $report;
+		$r[] = $obj;
+	}
+
+		return $r;
 	}
 	
 	public function getAvailableReports($object)
 	{
+/*
 		$sql = "SELECT DISTINCT r.idReport AS idReport, r.name AS name, r.description AS description, r.code AS code
 				FROM Pxa AS pa
 					JOIN Pxr AS pr ON (pr.idPaymentplan = pa.idPaymentplan)
 					JOIN Report AS r ON (r.idReport = pr.idReport)
 				WHERE pa.idAccount = :idAccount: 
-					AND pa.start <= :time: 
-					AND pa.end >= :time: 
+					AND 'pa.start' <= :time: 
+					AND 'pa.end' >= :time: 
 					AND r.module = :module: 
 					AND pa.status = :status:";
 		
@@ -118,17 +146,46 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 		));
 		
 		return $report;
+*/
+$sql = "SELECT DISTINCT r.idReport AS idReport, r.name AS name, r.module, r.description AS description, r.code AS code
+		FROM pxa AS pa
+			JOIN pxr AS pr ON (pr.idPaymentplan = pa.idPaymentplan)
+			JOIN report AS r ON (r.idReport = pr.idReport)
+		WHERE pa.idAccount = {$object->idAccount}
+			AND pa.start <= " . time() . "
+			AND pa.end >= " . time() . "
+			AND r.module = '{$object->module}'
+			AND pa.status = '{$object->status}'";
+
+
+$result = $this->db->query($sql);
+$reports = $result->fetchAll();
+
+$r = array();
+foreach($reports as $report) {
+	$obj = new stdClass();
+	$obj->idReport = $report['idReport'];
+	$obj->name = $report['name'];
+	$obj->module = $report['module'];
+	$obj->description = $report['description'];
+	$obj->code = $report['code'];
+
+	$r[] = $obj;
+}
+
+return $r;
 	}
 	
 	public function validateReportAvailable($object)
 	{
-		$sql = "SELECT DISTINCT r.idReport AS idReport, r.name AS name, r.description AS description, r.code AS code
+/*
+		$sql = "SELECT DISTINCT r.idReport AS idReport, r.name AS name, r.module, r.description AS description, r.code AS code
 				FROM Pxa AS pa
 					JOIN Pxr AS pr ON (pr.idPaymentplan = pa.idPaymentplan AND pr.idReport = :idReport:)
 					JOIN Report AS r ON (r.idReport = pr.idReport)
 				WHERE pa.idAccount = :idAccount: 
-					AND pa.start <= :time: 
-					AND pa.end >= :time:  
+					AND pa.start <= " . time() . " 
+					AND pa.end >= " . time() . "  
 					AND pa.status = :status:
 					AND r.module = :module:";
 		
@@ -136,7 +193,7 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 		
 		$report = $query->execute(array(
 			'idAccount' => $object->idAccount,
-			'time' => time(),
+//			'time' => time(),
 			'module' => $object->module,
 			'idReport' => $object->idReport,
 			'status' => $object->status,
@@ -145,7 +202,37 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 		if (isset($report[0])) {
 			return $report[0];
 		}
-		
+*/
+
+$sql = "SELECT DISTINCT r.idReport AS idReport, r.name AS name, r.module, r.description AS description, r.code AS code
+		FROM pxa AS pa
+			JOIN pxr AS pr ON (pr.idPaymentplan = pa.idPaymentplan AND pr.idReport = {$object->idReport})
+			JOIN report AS r ON (r.idReport = pr.idReport)
+		WHERE pa.idAccount = {$object->idAccount}
+			AND pa.start <= " . time() . "
+			AND pa.end >= " . time() . "
+			AND pa.status = '{$object->status}' 
+			AND r.module = '{$object->module}'";
+
+$result = $this->db->query($sql);
+$reports = $result->fetchAll();
+
+$r = array();
+foreach($reports as $report) {
+	$obj = new stdClass();
+	$obj->idReport = $report['idReport'];
+	$obj->name = $report['name'];
+	$obj->module = $report['module'];
+	$obj->description = $report['description'];
+	$obj->code = $report['code'];
+
+	$r[] = $obj;
+}		
+
+if (count($r) > 0) {
+	return $r[0];
+}
+
 		return false;
 	}
 	
@@ -163,10 +250,10 @@ class ControllerBase extends \Phalcon\Mvc\Controller
 	}
 	
 	
-	public function getResult($account, $sql) {
+	public function getResult($account, $sql) { 
 		switch ($account->database) {
-			case 'firebird':
-				$fconnector = new \Silar\Misc\FirebirdConnector();
+			case 'firebird': 
+				$fconnector = new \Silar\Misc\FirebirdConnector(); 
 				$fconnector->setAccount($account);
 				$fconnector->executeQuery($sql);
 				$result = $fconnector->getResult();

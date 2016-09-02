@@ -90,15 +90,15 @@
                             <tbody>
                                 <tr>
                                     <td>Email: </td>
-                                    <td>{{item.email}}</td>
+                                    <td><span class="lighter-medium">{{item.email}}</span></td>
                                 </tr>
                                 <tr>
                                     <td>Número de telefono/celular:</td>
-                                    <td>{{item.phone}}</td>
+                                    <td><span class="lighter-medium">{{item.phone}}</span></td>
                                 </tr>
                                 <tr>
                                     <td>Role:</td>
-                                    <td>{{item.role.name}}</td>
+                                    <td><span class="lighter-medium">{{item.role.name}}</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -113,11 +113,11 @@
                                 </tr>
                                 <tr>
                                     <td>Creado el:</td>
-                                    <td>{{date('d/M/Y H:i', item.created)}}</td>
+                                    <td><span class="lighter-medium">{{date('d/M/Y H:i', item.created)}}</span></td>
                                 </tr>
                                 <tr>
                                     <td>Última actualización:</td>
-                                    <td>{{date('d/M/Y H:i', item.updated)}}</td>
+                                    <td><span class="lighter-medium">{{date('d/M/Y H:i', item.updated)}}</span></td>
                                 </tr>
                             </tbody>
                         </table>

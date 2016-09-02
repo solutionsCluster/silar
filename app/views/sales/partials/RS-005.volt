@@ -48,29 +48,29 @@
 			$("#year").select2({
 				data: data
 			}).select2('val', {{year}});
-		});
-		
-		$.getJSON('{{url('filter/getmonths')}}',function(data){
-			$("#month").select2({
-				data: data
-			}).select2('val', {{month}});
-		});
-		
-		$.getJSON('{{url('filter/getbranches')}}', function(data) {
-			$("#branch").select2({
-				data: data
-			}).select2('val', 'all');
-			refresh();
+			
+			$.getJSON('{{url('filter/getmonths')}}',function(data){
+				$("#month").select2({
+					data: data
+				}).select2('val', {{month}});
+				
+				$.getJSON('{{url('filter/getbranches')}}', function(data) {
+					$("#branch").select2({
+						data: data
+					}).select2('val', 'all');
+					refresh();
+				});
+			});
 		});
     });
     
    function refresh() {
-        var object = createObject();
+        var object = createObject(false);
         getData{{report.idReport}}(object);
     }
     
     function downloadReport() {
-        var object = createObject();
+        var object = createObject(true);
         createReport(object);
     }
 
@@ -83,45 +83,65 @@
             type: "POST",
             data: {object: object},
             error: function(data) {
-                $.gritter.add({class_name: 'gritter-error', title: '<i class="glyphicon glyphicon-exclamation-sign"></i> Error', text: data.responseJSON.message, sticky: false, time: 6000});
+                var notification = new NotificationFx({
+					wrapper : document.body,
+					message : '<p>' + data.responseJSON.message + '</p>',
+					layout : 'growl',
+					effect : 'slide',
+					ttl : 15000,
+					type : 'error'
+				});
+				// show the notification
+				notification.show();
             },
             success: function(data) {
 				console.log(data.data);
                 $('#{{report.idReport}}').children().fadeOut(500, function() {
                     $('#{{report.idReport}}').empty();
-                    createPie({
-                        container: '{{report.idReport}}',
-                        title: object.title,
-                        subtitle: 'Porcentaje en ventas',
-                        data: data.data
-                    });
+					if (data.data.length == 0) {
+							$('#{{report.idReport}}').append('<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">\n\
+																<div class="alert alert-warning">\n\
+																	No existen datos con los filtros seleccionados\n\
+																</div>\n\
+															  </div>');
+					}
+					else {
+						createPie({
+							container: '{{report.idReport}}',
+							title: object.title,
+							subtitle: 'Ventas',
+							data: data.data
+						});
+					}
                 });
             }
         });
     }
 	
-	function createObject() {
-	{% if index is not defined%}
-		var m = $('#month').val();
-        var month = pad(m, 2);
-        var year = $('#year').val();
-        var title = month + '/' + year;
-		var branch = $('#branch').val();
-	{% else %}
+	function createObject(variable) {
+		var download = (variable ? 'true' : 'false');
 		var m = {{month}};
         var month = pad(m, 2);
         var year = {{year}};
-        var title = month + '/' + year;
-		var branch = 'all';
+        var branch = 'all';
+		
+	{% if index is not defined%}
+		m = $('#month').val();
+        month = pad(m, 2);
+        year = $('#year').val();
+		branch = $('#branch').val();
 	{% endif %}
+		
+		var title = month + '/' + year;
 		
 		 var object = {
             idReport: {{report.idReport}},
-			module: 'sales',
+			module: '{{report.module}}',
             month: month,
             year: year,
             branch: branch,
-            title: title
+            title: title,
+			download: download
         };
 		
 		return object;

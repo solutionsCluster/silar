@@ -27,7 +27,7 @@ class UserController extends ControllerBase
     public function newAction()
     {
         $user = new User();
-        $form = new UserForm($user);
+        $form = new UserForm($user, $this->user);
 
         if ($this->request->isPost()) {
             $form->bind($this->request->getPost(), $user);
@@ -102,7 +102,7 @@ class UserController extends ControllerBase
             return $this->response->redirect('user');
         }
 
-        $form = new UserForm($user);
+        $form = new UserForm($user, $this->user);
 
         if ($this->request->isPost()) {
             $form->bind($this->request->getPost(), $user);

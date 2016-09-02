@@ -7,11 +7,11 @@
                     <div class="logo-header">
                         <div class="app-logo-container">
                             <a href="http://solutionscluster.net/" target="_blank">
-                                <img src="{{url('')}}image-bank/silar-logo.jpg" class="app-logo"/>
+                                <img src="{{url('')}}{{imgbnk.relativeappimages}}/app-logo.png" class="app-logo"/>
                             </a>
                         </div>
                         <div class="client-logo-container">
-                            <img src="{{url('')}}image-bank/your-logo.jpg" class="client-logo"/>
+                            <img src="{{url('')}}{{imgbnk.relativeuserdir}}/your-logo.jpg" class="client-logo"/>
                         </div>
                     </div>
                 </div>

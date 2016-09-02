@@ -24,9 +24,15 @@
 	{{ javascript_include('vendors/notification-styles/js/notificationFx.js')}}
 {% endblock %}
 {% block body %}
+	<div class="big-space"></div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <h2 class="page-header"><strong>Reporte:</strong> {{report.name}}</h2>
+			<h2 class="page-header"><strong>Reporte:</strong> {{report.name}}</h2>
+			<h5 class="subtitle">
+				Configure los filtros, presione el botón "Descargar reporte", espere unos 
+				segundos(podría tardar) para descargar el
+				reporte de <strong>{{report.name}}</strong> en formato excel
+			</h5>
         </div>
     </div>
 
@@ -37,22 +43,5 @@
     </div>
 
     <div class="big-space"></div>
-    
-    {% if report.code == 'RPT-001'%}
-        {{ partial('sales/partials/RPT-001')}}
-    {% elseif report.code == 'RPT-002'%}
-        {{ partial('sales/partials/RPT-002')}}
-    {% elseif report.code == 'RS-003'%}
-        {{ partial('sales/partials/RS-003')}}
-    {% elseif report.code == 'RS-004'%}
-        {{ partial('sales/partials/RS-004')}}
-    {% elseif report.code == 'RS-005'%}
-        {{ partial('sales/partials/RS-005')}}
-	{% elseif report.code == 'RS-006'%}
-        {{ partial('sales/partials/RS-006')}}
-	{% elseif report.code == 'RS-007'%}
-        {{ partial('sales/partials/RS-007')}}
-	{% elseif report.code == 'RS-008'%}
-        {{ partial('sales/partials/RS-008')}}
-    {% endif %}
+	{{ partial('partials/report-partial')}}
 {% endblock %}

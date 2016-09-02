@@ -115,6 +115,10 @@
                     <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 text-right">
                         <input type="checkbox" data-id="{{item.idUser}}" class="switch tooltip-b3" {% if item.status == 1%} checked {% endif %} data-placement="top" title="Cambiar el estado de este usuario">
                         
+						<a href="{{url('session/loginasroot')}}/{{item.idUser}}" class="btn btn-warning btn-xs tooltip-b3" data-placement="top" title="Ingresar como este usuario">
+                            <span class="glyphicon glyphicon-sort"></span>
+                        </a>
+						
                         <a href="{{url('account/changepassword')}}/{{account.idAccount}}/{{item.idUser}}" class="btn btn-primary btn-xs tooltip-b3" data-placement="top" title="Cambiar la contraseña de este usuario">
                             <span class="glyphicon glyphicon-lock"></span>
                         </a>

@@ -11,9 +11,19 @@
 
     <script type="text/javascript">
         $(function () {
-            $(".select2").select2({
-            });
-
+			$(".select").select2();
+            $("#select2").select2({
+				allowClear: true,
+				placeholder: 'Seleccionar base de datos'
+            }).on("select2-selecting", function(e) {
+				$('#firebird-version').hide(800);
+				if (e.val === 'firebird') {
+					$('#firebird-version').show(800);
+				}
+			});
+			
+			$("#select2").select2("val", "");
+			
             $(".bootstrap-switch").bootstrapSwitch({
                 size: 'mini',
                 onColor: 'success',
@@ -62,104 +72,109 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                    <label><span class="required">*</span>NIT:</label>
+                   <span class="required">*</span>NIT:
                     {{ AccountForm.render('nit') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Nombre de la cuenta:</label>
+                    <span class="required">*</span>Nombre de la cuenta:
                     {{ AccountForm.render('aname') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Razón social:</label>
+                    <span class="required">*</span>Razón social:
                     {{ AccountForm.render('companyName') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Ciudad:</label>    
+                    <span class="required">*</span>Ciudad:    
                     {{ AccountForm.render('city') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Dirección:</label>    
+                    <span class="required">*</span>Dirección:    
                     {{ AccountForm.render('address') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Télefono:</label>    
+                    <span class="required">*</span>Télefono:    
                     {{ AccountForm.render('phone') }}
                 </div>
 
                 <div class="form-group">
-                    <label>Fax:</label>  
+                    Fax:  
                     {{ AccountForm.render('fax') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Dirección de correo corporativo:</label>  
+                    <span class="required">*</span>Dirección de correo corporativo:  
                     {{ AccountForm.render('email') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Actividad economica:</label>  
+                    <span class="required">*</span>Actividad economica:  
                     {{ AccountForm.render('idCiuu') }}
                 </div>
 					
                 <div class="form-group">
-                    <label><span class="required">*</span>Base de datos:</label>  
-                    {{ AccountForm.render('database', {'class': 'select2'}) }}
+                    <span class="required">*</span>Base de datos:  
+                    {{ AccountForm.render('database', {'class': 'select2', 'id': 'select2'}) }}
                 </div>
+					
+				<div class="form-group" style="display: none;" id="firebird-version">
+					<span class="required">*</span>Versión de firebird:  
+					{{ AccountForm.render('idFirebird', {'data-placeholder': 'cawky parky'}) }}
+				</div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Estado:</label>     
+                    <span class="required">*</span>Estado:     
                     {{ AccountForm.render('astatus') }}
                 </div>
             </div>
         
             <div class="col-xs-12 col-sm-12 col-md-5 col-lg-6">
                 <div class="form-group">
-                    <label><span class="required">*</span>Email</label>     
+                    <span class="required">*</span>Email     
                     {{ UserForm.render('email') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Nombres</label>
+                    <span class="required">*</span>Nombres
                     {{ UserForm.render('name') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Apellidos</label>
+                    <span class="required">*</span>Apellidos
                     {{ UserForm.render('lastName') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Número de telefono o celular</label>
+                    <span class="required">*</span>Número de telefono o celular
                     {{ UserForm.render('phone') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Nombre de usuario</label>
+                    <span class="required">*</span>Nombre de usuario
                     {{ UserForm.render('userName') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Contraseña</label>
+                    <span class="required">*</span>Contraseña
                     {{ UserForm.render('password1') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Repita la contraseña</label>
+                    <span class="required">*</span>Repita la contraseña
                     {{ UserForm.render('password2') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Role</label>
+                    <span class="required">*</span>Role
                     {{ UserForm.render('idRole') }}
                 </div>
 
                 <div class="form-group">
-                    <label><span class="required">*</span>Estado</label>
+                    <span class="required">*</span>Estado
                     {{ UserForm.render('status') }}
                 </div>
             </div>

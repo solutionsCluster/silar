@@ -36,9 +36,9 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
                         <div class="block-info">
-                            <div class="block-title">
+                            <div class="block-title active-account">
                                 <a href="{{url('report/edit')}}/{{item.idReport}}">
-                                    <strong>{{item.name}}</strong>
+                                    {{item.name}}
                                 </a>
                             </div>
                             <div class="block-detail">

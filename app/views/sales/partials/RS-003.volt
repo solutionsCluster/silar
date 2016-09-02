@@ -58,19 +58,19 @@
 			$("#year").select2({
 				data: data
 			}).select2('val', {{year}});
-		});
-
-		$.getJSON('{{url('filter/getmonths')}}', function(data) {
-			$("#month").select2({
-				data: data
-			}).select2('val', {{month}});
-		});
-
-		$.getJSON('{{url('filter/getbranches')}}', function(data) {
-			$("#branch").select2({
-				data: data
-			}).select2('val', 'all');
-			refresh();
+			
+			$.getJSON('{{url('filter/getmonths')}}', function(data) {
+				$("#month").select2({
+					data: data
+				}).select2('val', {{month}});
+			});
+			
+			$.getJSON('{{url('filter/getbranches')}}', function(data) {
+				$("#branch").select2({
+					data: data
+				}).select2('val', 'all');
+				refresh();
+			});
 		});
 	});
 {% else %}
@@ -78,12 +78,12 @@
 {% endif %}
     
 	function refresh() {
-		var obj = createObject();
+		var obj = createObject(false);
 		getData{{report.idReport}}(obj);
 	}
 	
 	function downloadReport() {
-		var obj = createObject();
+		var obj = createObject(true);
 		createReport(obj);
 	}
 		
@@ -96,54 +96,67 @@
             type: "POST",			
             data: {object: object},
             error: function(data){
-                $.gritter.add({class_name: 'gritter-error', title: '<i class="glyphicon glyphicon-exclamation-sign"></i> Error', text: data.responseJSON.message, sticky: false, time: 6000});
+                var notification = new NotificationFx({
+					wrapper : document.body,
+					message : '<p>' + data.responseJSON.message + '</p>',
+					layout : 'growl',
+					effect : 'slide',
+					ttl : 15000,
+					type : 'error'
+				});
+				// show the notification
+				notification.show();
             },
             success: function(data){
 				var title = {% if index is not defined%}'{{report.name}}'{% else %}''{% endif %};
                 $('#{{report.idReport}}').children().fadeOut(500, function() {
                     $('#{{report.idReport}}').empty();
                         var array = convertObjectInArray(data.data);
-                        createBasicLine({
-                            container: '{{report.idReport}}',
-                            title: title,
-                            subtitle: object.title,
-                            x: ['01', '02', '03', '04', '05', '06','07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
-                            y: 'Pesos colombianos($)',
-                            data: [{
-                                name: 'Ventas',
-                                data: array
-                            }]
-                        });	
+						createBasicLine({
+							container: '{{report.idReport}}',
+							title: title,
+							subtitle: object.title,
+							x: ['01', '02', '03', '04', '05', '06','07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+							y: 'Pesos colombianos($)',
+							data: [{
+								name: 'Ventas',
+								data: array
+							}]
+						});	
                 });
             }
         });
     }
 	
-	function createObject() {
-		{% if index is not defined%}
-			var m = $('#month').val();
-			var year = $('#year').val();
-			var branch = $('#branch').val();
-			var month = pad(m, 2);
-			var title = month + '/' + year;
-			var filter = $('#filter').val();
-		{% else %}
-			var m = {{month}};
-			var branch = 'all';
-			var month = pad(m, 2);
-			var year = {{year}};
-			var title = month + '/' + year;
-			var filter = 'daily';
-		{% endif %}	
+	function createObject(variable) {
+		var download = (variable ? 'true' : 'false');
+		var m = {{month}};
+		var branch = 'all';
+		var month = pad(m, 2);
+		var year = {{year}};
+		var filter = 'daily';
+		
+	{% if index is not defined%}
+		m = $('#month').val();
+		year = $('#year').val();
+		branch = $('#branch').val();
+		month = pad(m, 2);
+		title = month + '/' + year;
+		filter = $('#filter').val();
+	{% endif %}	
+		
+		var title = month + '/' + year;
+		filter = (variable ? 'accumulated' : filter);
 		
 		var obj = {
 			idReport: {{report.idReport}},
 			year: year,
 			month: month,
-			module: 'sales',
+			module: '{{report.module}}',
 			branch: branch,
 			title: title,
-			filter: filter
+			filter: filter,
+			download : download
 		};
 		
 		return obj;

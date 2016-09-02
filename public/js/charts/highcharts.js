@@ -74,7 +74,7 @@ function createPie(data) {
             text: data.title
         },
         tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            pointFormat: '{series.name}: <b>{point.y}</b>'
         },
         plotOptions: {
             pie: {
@@ -86,7 +86,8 @@ function createPie(data) {
                     style: {
                         color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                     }
-                }
+                },
+				showInLegend: true
             }
         },
         series: [{
@@ -232,7 +233,7 @@ function createBasicBar(data) {
             }
         },
         yAxis: {
-            min: 0,
+//            min: data.min,
             title: {
                 text: data.y,
                 align: 'high'
@@ -284,7 +285,7 @@ function createTable(data) {
                                 </tr>\n\
                                 <tr>\n\
                                   <td><strong>% Utilidad de las ventas del mes</strong></td>\n\
-                                  <td>$' + data.data.util + '</td>\n\
+                                  <td>' + data.data.util + '%</td>\n\
                                 </tr>\n\
                                 <tr>\n\
                                   <td><strong>Total CXC</strong></td>\n\
@@ -342,11 +343,24 @@ function createReport(object) {
 		data: {object: object},
 		error: function(data) {
 			$("#loading").hide('slow');
-			$.gritter.add({class_name: 'gritter-error', title: '<i class="glyphicon glyphicon-exclamation-sign"></i> Error', text: data.responseJSON.message, sticky: false, time: 6000});
+			var notification = new NotificationFx({
+				wrapper : document.body,
+				message : '<p>' + data.responseJSON.message + '</p>',
+				layout : 'growl',
+				effect : 'slide',
+				ttl : 15000,
+				type : 'error'
+			});
+			// show the notification
+			notification.show();
 		},
 		success: function(data) {
 			$("#loading").hide('slow');
 			window.location = url + 'report/downloadreport/' + data.message;
 		}
 	});
+}
+
+function adjustChartContainer(data) {
+	$("#" + data.container).css("height", data.height);
 }

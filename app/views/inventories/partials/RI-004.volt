@@ -1,20 +1,23 @@
 {% if index is not defined%}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="padding-top: 8px">
-        <input type="text" id="branch" class="select2" />
+        <input type="text" id="branch" class="select2" /> <br />
+		<select id="cant" name="cant" class="select2" style="padding-top: 5px">
+			<option value="10" selected>10 Primeros productos</option>
+			<option value="20">20 Primeros productos</option>
+			<option value="50">50 Primeros productos</option>
+			<option value="200">200 Primeros productos</option>
+			<option value="500">500 Primeros productos</option>
+			<option value="1000">1000 Primeros productos</option>
+		</select> 
     </div>
     
-	<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" style="padding-top: 8px">
-		<select id="cant" name="cant" class="select2">
-			<option value="10" selected>10 Productos mayor utilidad</option>
-			<option value="20">20 Productos mayor utilidad</option>
-			<option value="50">50 Productos mayor utilidad</option>
-			<option value="200">200 Productos mayor utilidad</option>
-			<option value="500">500 Productos mayor utilidad</option>
-			<option value="1000">1000 Productos mayor utilidad</option>
-			<option value="5000">5000 Productos mayor utilidad</option>
+	<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 text-right" style="padding-top: 8px">
+        <select id="status" name="status" class="select2">
+			<option value="worse">Peor utilidad</option>
+			<option value="better" selected>Mejor utilidad</option>
 		</select> 
-	</div>	
+    </div>
 		
     <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 text-right" style="padding-top: 8px">
         <input type="text" id="month" class="select2" />
@@ -47,9 +50,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <div id="{{report.idReport}}" style="height:100%;
-    width:100%;
-    position:relative; margin: 0 auto"></div>
+                <div id="{{report.idReport}}" style="height:100%;width:100%;margin: 0 auto"></div>
             </div>
         </div>
     </div>
@@ -75,23 +76,24 @@
 		$(function() {
 			$('#filter').select2();
 			$('#cant').select2();
+			$('#status').select2();
 			$.getJSON('{{url('filter/getyears')}}', function(data) {
 				$("#year").select2({
 					data: data
 				}).select2('val', {{year}});
-			});
-
-			$.getJSON('{{url('filter/getmonths')}}', function(data) {
-				$("#month").select2({
-					data: data
-				}).select2('val', {{month}});
-			});
-
-			$.getJSON('{{url('filter/getbranches')}}', function(data) {
-				$("#branch").select2({
-					data: data
-				}).select2('val', 'all');
-				refresh();
+				
+				$.getJSON('{{url('filter/getmonths')}}', function(data) {
+					$("#month").select2({
+						data: data
+					}).select2('val', {{month}});
+					
+					$.getJSON('{{url('filter/getbranches')}}', function(data) {
+						$("#branch").select2({
+							data: data
+						}).select2('val', 'all');
+						refresh();
+					});
+				});
 			});
 		});
 	{% else %}
@@ -131,9 +133,17 @@
             success: function(data){
                 $('#{{report.idReport}}').children().fadeOut(500, function() {
                     $('#{{report.idReport}}').empty();
-                        var util = convertObjectInArray(data.data.util);
-						var products = convertObjectInArray(data.data.products);
-						var title = {% if index is not defined%}'{{report.name}}'{% else %}''{% endif %};
+					var title = {% if index is not defined%}'{{report.name}}'{% else %}''{% endif %};
+					var util = convertObjectInArray(data.data.util);
+					var products = convertObjectInArray(data.data.products);
+					if (util.length == 0 || products.length == 0) {
+						$('#{{report.idReport}}').append('<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">\n\
+															<div class="alert alert-warning">\n\
+																No existen datos con los filtros seleccionados\n\
+															</div>\n\
+														  </div>');
+					}
+					else {
 						createBasicBar({
 							container: {{report.idReport}},
 							title: title,
@@ -146,40 +156,45 @@
 								data: util
 							}]
 						});
+					}
                 });
             }
         });
     }
 	
 	function createObject() {
-	{% if index is not defined%}
 		var filter = $('#filter').val();
-		var m = $('#month').val();
-		var branch = $('#branch').val();
-		var cant = $('#cant').val();;
-		var month = pad(m, 2);
-		var year = $('#year').val();
-		var title = month + '/' + year;
-	{% else %}
-		var filter = $('#filter').val();
+		var status = $('#status').val();
 		var m = {{month}};
 		var branch = 'all';
 		var cant = 10;
 		var month = pad(m, 2);
 		var year = {{year}};
-		var title = month + '/' + year;
+		
+	{% if index is not defined%}
+		m = $('#month').val();
+		branch = $('#branch').val();
+		cant = $('#cant').val();;
+		month = pad(m, 2);
+		year = $('#year').val();
 	{% endif %}
-	
+		
+		var title = month + '/' + year;
+		
 		var object = {
 			idReport: {{report.idReport}},
 			filter: filter,
 			cant: cant,
-			module: 'inventories',
+			module: '{{report.module}}',
 			year: year,
 			month: month,
 			branch: branch,
-			title: title
+			title: title,
+			status: status
 		};
+		
+		var height = (cant == 10 || cant == 20 ? cant*40: cant*20);
+		adjustChartContainer({container: '{{report.idReport}}', height: height});
 		
 		return object;
 	}	

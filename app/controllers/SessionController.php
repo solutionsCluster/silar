@@ -33,7 +33,7 @@ class SessionController extends ControllerBase
 
                             $this->user = $user;
 
-                            return $this->response->redirect("index");
+                            return $this->response->redirect("");
                         }
                         else {
                             $msg = "La cuenta ha sido bloqueada, por favor contacte al administrador";
@@ -91,11 +91,11 @@ class SessionController extends ControllerBase
                     $link = '<a href="' . $url . '" style="text-decoration: underline;">Click aqui</a>';
                     
                     try {
-                        $message = new AdministrativeMessages();
+                        $message = new \Silar\Misc\AdministrativeMessages();
+						$message->setSmtp($this->smtpsupport);
                         $message->setSubject("Instrucciones para recuperar la contraseña de su cuenta en Cluster Solutions - Silar");
-                        $message->setFrom(array('soporte@solutionscluster.net' => 'Soporte Cluster Solutions'));
                         $message->setTo(array($user->email => "{$user->name} {$user->lastName}"));
-                        $message->setReplyTo("noreply@solutionscluster.net");
+                        $message->setReplyTo("noreply@clustersolutions.net");
                         $message->searchMessage('reset-password');
                         $message->replaceVariables(array('%%resetpassword%%'), array($link));
                         $message->sendMessage();
@@ -108,7 +108,7 @@ class SessionController extends ControllerBase
             }
             
             $this->flashSession->success('Se ha enviado un correo electronico con instrucciones para recuperar la contraseña');
-            return $this->response->redirect('session/signin');
+            return $this->response->redirect('session/login');
         }
     }
     

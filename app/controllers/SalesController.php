@@ -26,7 +26,8 @@ class SalesController extends ControllerBase {
 
         if (!$report) {
             $this->flashSession->error("Reporte no encontrado, por favor valide la información");
-            return $this->response->redirect("sales/index");
+            $a= $this->response->redirect("sales/index");
+print($a); die('..');
         }
 		
         $this->view->setVar('report', $report);

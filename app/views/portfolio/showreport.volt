@@ -25,21 +25,24 @@
 	
 {% endblock %}
 {% block body %}
+	<div class="big-space"></div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<h2 class="page-header"><strong>Reporte:</strong> {{report.name}}</h2>
+			<h5 class="subtitle">
+				Configure los filtros, presione el botón "Descargar reporte", espere unos 
+				segundos(podría tardar) para descargar el
+				reporte de <strong>{{report.name}}</strong> en formato excel
+			</h5>
         </div>
     </div>
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                {{flashSession.output()}}
-			</div>
+			{{flashSession.output()}}
 		</div>
+	</div>
 
-		<div class="big-space"></div>
-
-    {% if report.code == 'RP-001'%}
-        {{ partial('portfolio/partials/RP-001')}}
-    {% endif %}
+	<div class="big-space"></div>
+	{{ partial('partials/report-partial')}}
 {% endblock %}

@@ -42,23 +42,23 @@
 			$("#year").select2({
 				data: data
 			}).select2('val', {{year}});
-		});
-
-		$.getJSON('{{url('filter/getbranches')}}', function(data) {
-			$("#branch").select2({
-				data: data
-			}).select2('val', 'all');
-			refresh();
+			
+			$.getJSON('{{url('filter/getbranches')}}', function(data) {
+				$("#branch").select2({
+					data: data
+				}).select2('val', 'all');
+				refresh();
+			});
 		});
     });
 	
 	function refresh() {
-        var object = createObject();
+        var object = createObject(false);
         getData{{report.idReport}}(object);
     }
 	
 	function downloadReport() {
-		var object = createObject();
+		var object = createObject(true);
 		createReport(object);
 	}
 
@@ -71,39 +71,59 @@
             type: "POST",			
             data: {object: object},
             error: function(data){
-                $.gritter.add({class_name: 'gritter-error', title: '<i class="glyphicon glyphicon-exclamation-sign"></i> Error', text: data.responseJSON.message, sticky: false, time: 6000});
+				var notification = new NotificationFx({
+					wrapper : document.body,
+					message : '<p>' + data.responseJSON.message + '</p>',
+					layout : 'growl',
+					effect : 'slide',
+					ttl : 15000,
+					type : 'error'
+				});
+				// show the notification
+				notification.show();
             },
             success: function(data){
                 $('#{{report.idReport}}').children().fadeOut(500, function() {
                     $('#{{report.idReport}}').empty();
-                        createBasicLine({
-                            container: '{{report.idReport}}',
-                            title: '{{report.name}}',
-                            subtitle: object.title,
-                            x: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-                            y: 'Pesos colombianos($)',
-                            data: data.data
-                        });	
+						if (data.data.length == 0) {
+							$('#{{report.idReport}}').append('<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">\n\
+																<div class="alert alert-warning">\n\
+																	No existen datos con los filtros seleccionados\n\
+																</div>\n\
+															  </div>');
+						}
+						else {
+							createBasicLine({
+								container: '{{report.idReport}}',
+								title: '{{report.name}}',
+								subtitle: object.title,
+								x: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+								y: 'Pesos colombianos($)',
+								data: data.data
+							});	
+						}
                 });
             }
         });
     }
 	
-	function createObject() {
-	{% if index is not defined%}
-		var year = $('#year').val();
-		var branch = $('#branch').val();
-	{% else %}
+	function createObject(variable) {
+		var download = (variable ? 'true' : 'false');
 		var branch = 'all';
 		var year = {{year}};
+		
+	{% if index is not defined%}
+		year = $('#year').val();
+		branch = $('#branch').val();
 	{% endif %}	
 		
 		var object = {
 			idReport: {{report.idReport}},
-			module: 'sales',
+			module: '{{report.module}}',
 			year: year,
 			branch: branch,
-			title: year
+			title: year,
+			download: download
 		};
 		
 		return object;

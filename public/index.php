@@ -127,16 +127,28 @@ try {
     $system->ipaddresses = $config->system->ipaddresses;
     $di->set('system', $system);
 	
+	/*
+	 * Información del smtp de soporte
+	 */
+	$smtpsupport = new \stdClass;
+    $smtpsupport->smtp = $config->smtpsupport->smtp;
+    $smtpsupport->port1 = $config->smtpsupport->port1;
+    $smtpsupport->port2 = $config->smtpsupport->port2;
+    $smtpsupport->port3 = $config->smtpsupport->port3;
+    $smtpsupport->name = $config->smtpsupport->name;
+    $smtpsupport->email = $config->smtpsupport->email;
+    $smtpsupport->user = $config->smtpsupport->user;
+    $smtpsupport->password = $config->smtpsupport->password;
+    $di->set('smtpsupport', $smtpsupport);
 	
 	/*
     * Conexión a firebird
     */
     $firebird = new \stdClass;
-    $firebird->dir = $config->databases->dir;
-    $firebird->host = $config->databases->host;
+    $firebird->dir = $config->firebird->dir;
+    $firebird->host = $config->firebird->host;
     $firebird->username = $config->firebird->username;
     $firebird->password = $config->firebird->password;
-
     $di->set('firebird', $firebird);
 	
     /**

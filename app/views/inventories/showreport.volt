@@ -25,9 +25,15 @@
 	
 {% endblock %}
 {% block body %}
+	<div class="big-space"></div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<h2 class="page-header"><strong>Reporte:</strong> {{report.name}}</h2>
+			<h5 class="subtitle">
+				Configure los filtros, presione el botón "Descargar reporte", espere unos 
+				segundos(podría tardar) para descargar el
+				reporte de <strong>{{report.name}}</strong> en formato excel
+			</h5>
         </div>
     </div>
 
@@ -38,14 +44,5 @@
 	</div>
 
 	<div class="big-space"></div>
-
-    {% if report.code == 'RI-001'%}
-        {{ partial('inventories/partials/RI-001')}}
-	{% elseif report.code == 'RI-002'%}
-        {{ partial('inventories/partials/RI-002')}}
-	{% elseif report.code == 'RI-003'%}
-        {{ partial('inventories/partials/RI-003')}}
-	{% elseif report.code == 'RI-004'%}
-        {{ partial('inventories/partials/RI-004')}}
-    {% endif %}
+	{{ partial('partials/report-partial')}}
 {% endblock %}

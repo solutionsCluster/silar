@@ -106,9 +106,8 @@ class ReportController extends ControllerBase
 	public function getdataforreportAction() {
         if ($this->request->isPost()) {
 			$object = $this->request->getPost('object');
-//			$this->logger->log("Obj: " . print_r($object, true));
-			
-			$account = $this->user->account;
+			$this->logger->log("Obj: " . print_r($object, true));
+			$account = $this->user->account; 
 			$obj = new stdClass();
 			$obj->idAccount = $account->idAccount;
 			$obj->module = $object['module'];
@@ -120,9 +119,59 @@ class ReportController extends ControllerBase
             if (!$report) {
                 return $this->setJsonResponse(array('message' => 'Reporte no encontrado, por favor valide la información'), 404);
             }
-			
+	
             try {
-				$sql = $this->getSQL($account, $report, $object);
+		$sql = $this->getSQL($account, $report, $object); 
+                if (empty($sql)) {
+                    return $this->setJsonResponse(array('message' => 'Reporte no encontrado, por favor valide la información'), 404);
+                }
+
+				$result = array(); 
+				if (is_array($sql)) {
+					foreach ($sql as $s) {
+						//print_r($account->database); die('..'); 
+						$this->logger->log("SQL: {$s}");
+						$result[] = $this->getResult($account, $s);
+						//print_r($result );
+					}
+	//	die(' hola');	
+				}
+				else { 
+					$this->logger->log("SQL: {$sql}");
+					$result = $this->getResult($account, $sql);
+				}
+			//	print($sql);die('..');
+				$data = $this->getData($account, $report, $result, $object);
+				
+//		print_r($data); die();		
+                return $this->setJsonResponse(array('data' => $data), 200);
+            } catch (Exception $ex) {
+                $this->logger->log("Exception while connection with firebird database... {$ex}");
+            }
+        }
+    }
+
+    public function createreportAction() {
+        if ($this->request->isPost()) {
+			$account = $this->user->account;
+            $object = $this->request->getPost('object');
+			$obj = new stdClass();
+			$obj->idAccount = $account->idAccount;
+			$obj->module = $object['module'];
+			$obj->idReport = $object['idReport'];
+			$obj->status = 'active';
+			
+//			$this->logger->log("Obj: " . print_r($object, true));
+			
+			$report = $this->validateReportAvailable($obj);
+			
+            if (!$report) {
+                return $this->setJsonResponse(array('message' => 'Reporte no encontrado, por favor valide la información'), 404);
+            }
+
+            try {
+                $sql = $this->getSQL($account, $report, $object);
+				
                 if (empty($sql)) {
                     return $this->setJsonResponse(array('message' => 'Reporte no encontrado, por favor valide la información'), 404);
                 }
@@ -140,39 +189,6 @@ class ReportController extends ControllerBase
 				}
 				
 				$data = $this->getData($account, $report, $result, $object);
-				
-                return $this->setJsonResponse(array('data' => $data), 200);
-            } catch (Exception $ex) {
-                $this->logger->log("Exception while connection with firebird database... {$ex}");
-            }
-        }
-    }
-
-    public function createreportAction() {
-        if ($this->request->isPost()) {
-			$account = $this->user->account;
-            $object = $this->request->getPost('object');
-			$obj = new stdClass();
-			$obj->idAccount = $account->idAccount;
-			$obj->module = $object['module'];
-			$obj->idReport = $object['idReport'];
-			$obj->status = 'active';
-
-			$report = $this->validateReportAvailable($obj);
-			
-            if (!$report) {
-                return $this->setJsonResponse(array('message' => 'Reporte no encontrado, por favor valide la información'), 404);
-            }
-
-            try {
-                $sql = $this->getSQL($report, $object);
-
-                if (empty($sql)) {
-                    return $this->setJsonResponse(array('message' => 'Reporte no encontrado, por favor valide la información'), 404);
-                }
-
-                $result = $this->getResult($account, $sql);
-				$data = $this->getData($report, $result, $object);
 				$tmp = $this->getReport($data, $object, $account, $report);
 
                 return $this->setJsonResponse(array('message' => $tmp->idTmpreport), 200);

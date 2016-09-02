@@ -7,7 +7,7 @@ class FilterController extends ControllerBase {
             $sql = "select sysdet.s AS idBranch, sysdet.nombre_sucursal AS name from sysdet";
             $account = $this->user->account;
 
-            $fconnector = new \Silar\Misc\FireBirdConnector();
+            $fconnector = new \Silar\Misc\FirebirdConnector();
             $fconnector->setAccount($account);
             $fconnector->executeQuery($sql);
             $result = $fconnector->getResult();
@@ -37,7 +37,7 @@ class FilterController extends ControllerBase {
             $sql = "select * from linea";
             $account = $this->user->account;
 
-            $fconnector = new \Silar\Misc\FireBirdConnector();
+            $fconnector = new \Silar\Misc\FirebirdConnector();
             $fconnector->setAccount($account);
             $fconnector->executeQuery($sql);
             $result = $fconnector->getResult();
@@ -67,7 +67,7 @@ class FilterController extends ControllerBase {
             $sql = "select * from grupo";
             $account = $this->user->account;
 
-            $fconnector = new \Silar\Misc\FireBirdConnector();
+            $fconnector = new \Silar\Misc\FirebirdConnector();
             $fconnector->setAccount($account);
             $fconnector->executeQuery($sql);
             $result = $fconnector->getResult();
@@ -97,7 +97,7 @@ class FilterController extends ControllerBase {
             $sql = "select marcas.codmarca, marcas.descmarca from marcas";
             $account = $this->user->account;
 
-            $fconnector = new \Silar\Misc\FireBirdConnector();
+            $fconnector = new \Silar\Misc\FirebirdConnector();
             $fconnector->setAccount($account);
             $fconnector->executeQuery($sql);
             $result = $fconnector->getResult();
@@ -128,11 +128,50 @@ class FilterController extends ControllerBase {
         for ($g = 1; $g < 13; $g++) {
             $obj = new stdClass();
             $obj->id = $r;
-            $obj->text = "{$r}";
+            $obj->text = "";
+			switch ($r) {
+				case 1:
+					$obj->text = "Enero";
+					break;
+				case 2:
+					$obj->text = "Febrero";
+					break;
+				case 3:
+					$obj->text = "Marzo";
+					break;
+				case 4:
+					$obj->text = "Abril";
+					break;
+				case 5:
+					$obj->text = "Mayo";
+					break;
+				case 6:
+					$obj->text = "Junio";
+					break;
+				case 7:
+					$obj->text = "Julio";
+					break;
+				case 8:
+					$obj->text = "Agosto";
+					break;
+				case 9:
+					$obj->text = "Septiembre";
+					break;
+				case 10:
+					$obj->text = "Octubre";
+					break;
+				case 11:
+					$obj->text = "Noviembre";
+					break;
+				case 12:
+					$obj->text = "Diciembre";
+					break;
+			}
+			
             $months[] = $obj;
             $r++;
         }
-
+		
         return $this->setJsonResponse($months, 200);
     }
 

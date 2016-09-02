@@ -62,11 +62,7 @@ class PHPExcelConnector {
             case 'RS-007':
                 $this->createRS007Report();
                 break;
-
-            case 'RS-008':
-                $this->createRS008Report();
-                break;
-			
+	
             case 'RP-001':
                 $this->createRP001Report();
                 break;
@@ -86,6 +82,10 @@ class PHPExcelConnector {
 			case 'RI-004':
                 $this->createRI004Report();
                 break;
+			
+			case 'RI-005':
+                $this->createRI005Report();
+                break;
 
             default:
                 break;
@@ -96,31 +96,27 @@ class PHPExcelConnector {
         $this->createExcelObject();
 
         $header = array(
-            array('key' => 'A1', 'name' => 'FECHA'),
-            array('key' => 'B1', 'name' => "CANTIDAD"),
-            array('key' => 'C1', 'name' => "PRECIO PRODUCTO"),
-            array('key' => 'D1', 'name' => "COSTO"),
+            array('key' => 'A1', 'name' => 'MES'),
+            array('key' => 'B1', 'name' => "NOMBRE SUCURSAL"),
+            array('key' => 'C1', 'name' => "CÓDIGO LINEA"),
+            array('key' => 'D1', 'name' => "NOMBRE LINEA"),
             array('key' => 'E1', 'name' => "VALOR VENTA"),
-            array('key' => 'F1', 'name' => "COSTO VENTA"),
-            array('key' => 'G1', 'name' => "NOMBRE SUCURSAL"),
-            array('key' => 'H1', 'name' => "CÓDIGO LINEA"),
-            array('key' => 'I1', 'name' => "NOMBRE LINEA"),
         );
 
         $this->createExcelHeader($header);
-
+		
+		$month = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
         $row = 2;
+		
+		$this->logger->log(print_r($this->data, true));
+		
         foreach ($this->data as $data) {
             $array = array(
-                $data->FECHA,
-                $data->QTYSHIP,
-                round($data->PRICE),
-                round($data->COST),
-                round($data->MULTIPLY_01),
-                round($data->MULTIPLY),
-                utf8_encode(trim($data->NOMBRE_SUCURSAL)),
+                $month[$data->MES-1],
+				utf8_encode(trim($data->NOMBRE_SUCURSAL)),
                 $data->CODLINEA,
                 $data->DESCLINEA,
+                round($data->SUM)
             );
 
             $this->phpExcelObj->getActiveSheet()->fromArray($array, NULL, "A{$row}");
@@ -128,28 +124,19 @@ class PHPExcelConnector {
             $row++;
         }
 
-        $this->styleExcelHeader('A1:I1');
+        $this->styleExcelHeader('A1:E1');
 
         $array = array(
-            array('key' => 'A', 'size' => 20),
-            array('key' => 'B', 'size' => 15),
-            array('key' => 'C', 'size' => 25),
-            array('key' => 'D', 'size' => 25),
-            array('key' => 'E', 'size' => 25),
-            array('key' => 'F', 'size' => 25),
-            array('key' => 'G', 'size' => 35),
-            array('key' => 'H', 'size' => 15),
-            array('key' => 'I', 'size' => 30),
+            array('key' => 'A', 'size' => 15),
+            array('key' => 'B', 'size' => 40),
+            array('key' => 'C', 'size' => 15),
+            array('key' => 'D', 'size' => 30),
+            array('key' => 'E', 'size' => 30),
         );
 
         $this->setColumnDimesion($array);
-
-        $this->formatUSDNumbers("C2:C{$row}");
-        $this->formatUSDNumbers("D2:D{$row}");
         $this->formatUSDNumbers("E2:E{$row}");
-        $this->formatUSDNumbers("F2:F{$row}");
-
-        $this->createExcelFilter("I1:I{$row}");
+        $this->createExcelFilter("D1:D{$row}");
 
         $this->createExcelFile();
     }
@@ -165,24 +152,11 @@ class PHPExcelConnector {
 
         $this->createExcelHeader($header);
 
-        $this->filter['filter'] = 'daily';
-        $modeler = new \Silar\Misc\SourceModeler();
-        $modeler->setReport($this->report);
-        $modeler->setData($this->data);
-        $modeler->setFilter($this->filter);
-        $modeler->model();
-        $data1 = $modeler->getModeledData();
-
-        $this->filter['filter'] = 'accumulated';
-        $modeler->setFilter($this->filter);
-        $modeler->model();
-        $data2 = $modeler->getModeledData();
-
         $row = 2;
-        for ($i = 1; $i < count($data1) + 1; $i++) {
+        for ($i = 1; $i < count($this->data[0]) + 1; $i++) {
             $fecha = "{$i}/{$this->filter['title']}";
-            $daily = round($data1[$i]);
-            $acum = round($data2[$i]);
+            $daily = round($this->data[0][$i]);
+            $acum = round($this->data[1][$i]);
             $array = array($fecha, $daily, $acum);
 
             $this->phpExcelObj->getActiveSheet()->fromArray($array, NULL, "A{$row}");
@@ -218,29 +192,16 @@ class PHPExcelConnector {
 
         $this->createExcelHeader($header);
 
-        $this->filter['filter'] = 'daily';
-        $modeler = new \Silar\Misc\SourceModeler();
-        $modeler->setReport($this->report);
-        $modeler->setData($this->data);
-        $modeler->setFilter($this->filter);
-        $modeler->model();
-        $data1 = $modeler->getModeledData();
-
-        $this->filter['filter'] = 'accumulated';
-        $modeler->setFilter($this->filter);
-        $modeler->model();
-        $data2 = $modeler->getModeledData();
-
         $row = 2;
 
         $mons = array(1 => "Enero", 2 => "Febrero", 3 => "Marzo", 4 => "Abril", 5 => "Mayo", 6 => "Junio", 7 => "Julio", 8 => "Agosto", 9 => "Septiembre", 10 => "Octubre", 11 => "Noviembre", 12 => "Diciembre");
-
-        for ($i = 1; $i < count($data1[$this->filter['year1']]) + 1; $i++) {
+		
+		for ($i = 1; $i < count($this->data[0][$this->filter['year1']]) + 1; $i++) {
             $mes = $mons[$i];
-            $sub1 = round($data1[$this->filter['year1']][$i]);
-            $sub2 = round($data1[$this->filter['year2']][$i]);
-            $acum1 = round($data2[$this->filter['year1']][$i]);
-            $acum2 = round($data2[$this->filter['year2']][$i]);
+            $sub1 = round($this->data[0][$this->filter['year1']][$i]);
+            $sub2 = round($this->data[0][$this->filter['year2']][$i]);
+            $acum1 = round($this->data[1][$this->filter['year1']][$i]);
+            $acum2 = round($this->data[1][$this->filter['year2']][$i]);
 
             $array = array($mes, $sub1, $sub2, $acum1, $acum2);
 
@@ -309,12 +270,12 @@ class PHPExcelConnector {
 
         $array = array(
             array('key' => 'A', 'size' => 20),
-            array('key' => 'B', 'size' => 15),
-            array('key' => 'C', 'size' => 25),
-            array('key' => 'D', 'size' => 25),
-            array('key' => 'E', 'size' => 25),
-            array('key' => 'F', 'size' => 25),
-            array('key' => 'G', 'size' => 25),
+            array('key' => 'B', 'size' => 10),
+            array('key' => 'C', 'size' => 20),
+            array('key' => 'D', 'size' => 20),
+            array('key' => 'E', 'size' => 20),
+            array('key' => 'F', 'size' => 20),
+            array('key' => 'G', 'size' => 40),
             array('key' => 'H', 'size' => 25),
             array('key' => 'I', 'size' => 30),
         );
@@ -335,35 +296,28 @@ class PHPExcelConnector {
         $this->createExcelObject();
 
         $header = array(
-            array('key' => 'A1', 'name' => 'FECHA'),
-            array('key' => 'B1', 'name' => 'CANTIDAD'),
-            array('key' => 'C1', 'name' => 'PRECIO PRODUCTO'),
-            array('key' => 'D1', 'name' => 'COSTO'),
-            array('key' => 'E1', 'name' => 'VALOR VENTA'),
-            array('key' => 'F1', 'name' => 'COSTO VENTA'),
-            array('key' => 'G1', 'name' => 'NOMBRE SUCURSAL'),
-            array('key' => 'H1', 'name' => 'CÓDIGO LINEA'),
-            array('key' => 'I1', 'name' => 'NOMBRE LINEA'),
-            array('key' => 'J1', 'name' => 'CÓDIGO GRUPO'),
-            array('key' => 'K1', 'name' => 'NOMBRE GRUPO'),
+            array('key' => 'A1', 'name' => 'MES'),
+            array('key' => 'B1', 'name' => 'NOMBRE SUCURSAL'),
+            array('key' => 'C1', 'name' => 'CÓDIGO LINEA'),
+            array('key' => 'D1', 'name' => 'NOMBRE LINEA'),
+            array('key' => 'E1', 'name' => 'CÓDIGO GRUPO'),
+            array('key' => 'F1', 'name' => 'NOMBRE GRUPO'),
+            array('key' => 'G1', 'name' => 'TOTAL VENTA')
         );
 
         $this->createExcelHeader($header);
-
+		$months = array(1 => "Enero", 2 => "Febrero", 3 => "Marzo", 4 => "Abril", 5 => "Mayo", 6 => "Junio", 7 => "Julio", 8 => "Agosto", 9 => "Septiembre", 10 => "Octubre", 11 => "Noviembre", 12 => "Diciembre");
+		
         $row = 2;
         foreach ($this->data as $data) {
             $array = array(
-                $data->FECHA,
-                $data->QTYSHIP,
-                round($data->PRICE),
-                round($data->COST),
-                round($data->SUBTRACT),
-                round($data->MULTIPLY),
+                $months[$data->MES],
                 utf8_encode(trim($data->NOMBRE_SUCURSAL)),
-                $data->CODLINEA,
+				$data->CODLINEA,
                 $data->DESCLINEA,
                 $data->CODGRUPO,
                 $data->DESCGRUPO,
+                round($data->SUM)
             );
 
             $this->phpExcelObj->getActiveSheet()->fromArray($array, NULL, "A{$row}");
@@ -374,28 +328,20 @@ class PHPExcelConnector {
         $this->styleExcelHeader("A1:K1");
 
         $array = array(
-            array('key' => 'A', 'size' => 20),
-            array('key' => 'B', 'size' => 10),
+            array('key' => 'A', 'size' => 15),
+            array('key' => 'B', 'size' => 35),
             array('key' => 'C', 'size' => 25),
-            array('key' => 'D', 'size' => 25),
+            array('key' => 'D', 'size' => 30),
             array('key' => 'E', 'size' => 25),
-            array('key' => 'F', 'size' => 25),
+            array('key' => 'F', 'size' => 30),
             array('key' => 'G', 'size' => 35),
-            array('key' => 'H', 'size' => 15),
-            array('key' => 'I', 'size' => 30),
-            array('key' => 'J', 'size' => 15),
-            array('key' => 'K', 'size' => 25),
         );
 
         $this->setColumnDimesion($array);
 
-        $this->formatUSDNumbers("C2:C{$row}");
-        $this->formatUSDNumbers("D2:D{$row}");
-        $this->formatUSDNumbers("E2:E{$row}");
-        $this->formatUSDNumbers("F2:F{$row}");
+        $this->formatUSDNumbers("G2:G{$row}");
 
-        $this->createExcelFilter("I1:I{$row}");
-        $this->createExcelFilter("K1:K{$row}");
+        $this->createExcelFilter("F1:F{$row}");
 
         $this->createExcelFile();
     }
@@ -457,74 +403,6 @@ class PHPExcelConnector {
         $this->createExcelFile();
     }
 
-    private function createRS008Report() {
-        $this->createExcelObject();
-
-        $header = array(
-            array('key' => 'A1', 'name' => 'FECHA'),
-            array('key' => 'B1', 'name' => 'NIT PROVEEDOR'),
-            array('key' => 'C1', 'name' => 'PROVEEDOR'),
-            array('key' => 'D1', 'name' => 'CÓDIGO ITEM'),
-            array('key' => 'E1', 'name' => 'COSTO ITEM'),
-            array('key' => 'F1', 'name' => 'CANTIDAD'),
-            array('key' => 'G1', 'name' => 'VALOR DESCUENTO'),
-            array('key' => 'H1', 'name' => 'VALOR COMPRA'),
-            array('key' => 'I1', 'name' => 'DOCUMENTO COMPRA'),
-            array('key' => 'J1', 'name' => 'NÚMERO DE DOCUMENTO'),
-            array('key' => 'K1', 'name' => 'SUCURSAL'),
-        );
-
-        $this->createExcelHeader($header);
-
-        $row = 2;
-        foreach ($this->data as $data) {
-            $array = array(
-                $data->FECHA,
-                $data->ID_N,
-                $data->COMPANY,
-                $data->ITEM,
-                round($data->COST),
-                $data->QTY,
-                round($data->VALORDCT),
-                round($data->VALOR),
-                $data->TIPO,
-                $data->NUMBER,
-                utf8_encode(trim($data->NOMBRE_SUCURSAL)),
-            );
-
-            $this->phpExcelObj->getActiveSheet()->fromArray($array, NULL, "A{$row}");
-            unset($array);
-            $row++;
-        }
-
-        $this->styleExcelHeader("A1:K1");
-
-        $array = array(
-            array('key' => 'A', 'size' => 20),
-            array('key' => 'B', 'size' => 15),
-            array('key' => 'C', 'size' => 25),
-            array('key' => 'D', 'size' => 25),
-            array('key' => 'E', 'size' => 25),
-            array('key' => 'F', 'size' => 25),
-            array('key' => 'G', 'size' => 25),
-            array('key' => 'H', 'size' => 25),
-            array('key' => 'I', 'size' => 25),
-            array('key' => 'J', 'size' => 25),
-            array('key' => 'K', 'size' => 25),
-        );
-
-        $this->setColumnDimesion($array);
-
-        $this->formatUSDNumbers("E1:E{$row}");
-        $this->formatUSDNumbers("G2:G{$row}");
-        $this->formatUSDNumbers("H2:H{$row}");
-
-        $this->createExcelFilter("C1:C{$row}");
-
-        $this->createExcelFile();
-    }
-
-	
 	private function createRP001Report() {
 		$this->createExcelObject();
 		$b2 = ($this->filter['filter'] == 'daily' ? 'CARTERA DIARIA' : 'CARTERA ACUMULADA');
@@ -713,6 +591,73 @@ class PHPExcelConnector {
         $this->createExcelFile();
 	}
 	
+	private function createRI005Report() {
+        $this->createExcelObject();
+
+        $header = array(
+            array('key' => 'A1', 'name' => 'FECHA'),
+            array('key' => 'B1', 'name' => 'NIT PROVEEDOR'),
+            array('key' => 'C1', 'name' => 'PROVEEDOR'),
+            array('key' => 'D1', 'name' => 'CÓDIGO ITEM'),
+            array('key' => 'E1', 'name' => 'COSTO ITEM'),
+            array('key' => 'F1', 'name' => 'CANTIDAD'),
+            array('key' => 'G1', 'name' => 'VALOR DESCUENTO'),
+            array('key' => 'H1', 'name' => 'VALOR COMPRA'),
+            array('key' => 'I1', 'name' => 'DOCUMENTO COMPRA'),
+            array('key' => 'J1', 'name' => 'NÚMERO DE DOCUMENTO'),
+            array('key' => 'K1', 'name' => 'SUCURSAL'),
+        );
+
+        $this->createExcelHeader($header);
+
+        $row = 2;
+        foreach ($this->data as $data) {
+            $array = array(
+                $data->FECHA,
+                $data->ID_N,
+                $data->COMPANY,
+                $data->ITEM,
+                round($data->COST),
+                $data->QTY,
+                round($data->VALORDCT),
+                round($data->VALOR),
+                $data->TIPO,
+                $data->NUMBER,
+                utf8_encode(trim($data->NOMBRE_SUCURSAL)),
+            );
+
+            $this->phpExcelObj->getActiveSheet()->fromArray($array, NULL, "A{$row}");
+            unset($array);
+            $row++;
+        }
+
+        $this->styleExcelHeader("A1:K1");
+
+        $array = array(
+            array('key' => 'A', 'size' => 20),
+            array('key' => 'B', 'size' => 15),
+            array('key' => 'C', 'size' => 35),
+            array('key' => 'D', 'size' => 15),
+            array('key' => 'E', 'size' => 15),
+            array('key' => 'F', 'size' => 10),
+            array('key' => 'G', 'size' => 20),
+            array('key' => 'H', 'size' => 20),
+            array('key' => 'I', 'size' => 15),
+            array('key' => 'J', 'size' => 15),
+            array('key' => 'K', 'size' => 40),
+        );
+
+        $this->setColumnDimesion($array);
+
+        $this->formatUSDNumbers("E1:E{$row}");
+        $this->formatUSDNumbers("G2:G{$row}");
+        $this->formatUSDNumbers("H2:H{$row}");
+
+        $this->createExcelFilter("C1:C{$row}");
+
+        $this->createExcelFile();
+    }
+	
     private function createExcelObject() {
         // Create new PHPExcel object
         $this->phpExcelObj = new \PHPExcel();
@@ -723,7 +668,7 @@ class PHPExcelConnector {
                 ->setSubject('Ventas por Clasificación')
                 ->setDescription($this->report->description)
                 ->setKeywords('sales report excel')
-                ->setCategory($this->report->module);
+                ->setCategory('Report');
     }
 
     private function createExcelHeader($array) {
@@ -761,6 +706,7 @@ class PHPExcelConnector {
 
     private function formatUSDNumbers($fields) {
         $this->phpExcelObj->getActiveSheet()->getStyle($fields)->getNumberFormat()->setFormatCode(\PHPExcel_Style_NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
+//        $this->phpExcelObj->getActiveSheet()->getStyle($fields)->getNumberFormat()->setFormatCode('@');
     }
 
     private function createExcelFilter($fields) {

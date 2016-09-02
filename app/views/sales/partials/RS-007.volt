@@ -18,10 +18,23 @@
     </div>
     <div class="big-space"></div>
 {% endif %}
-
-<div class="row" id="{{report.idReport}}"></div>
+	
+{% if index is not defined%}
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+			<div style="display: inline; margin-right: 10px;"><img src="{{url('')}}images/spinner.GIF" height="35" width="35" id="loading" style="display: none;"/></div>
+			<button class="btn btn-sm btn-primary" onClick="downloadReport();">
+				<i class="glyphicon glyphicon-download-alt"></i> Descargar reporte
+			</button>
+		</div>
+	</div>
+	<div class="big-space"></div>
+{% endif %}
+		
+	<div class="row" id="{{report.idReport}}"></div>
 
 {% if index is not defined%}
+	<div class="big-space"></div>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
 			<div style="display: inline; margin-right: 10px;"><img src="{{url('')}}images/spinner.GIF" height="35" width="35" id="loading" style="display: none;"/></div>
@@ -43,29 +56,29 @@
 			$("#year").select2({
 				data: data
 			}).select2('val', {{year}});
-		});
-
-		$.getJSON('{{url('filter/getmonths')}}', function(data) {
-			$("#month").select2({
-				data: data
-			}).select2('val', {{month}});
-		});
-
-		$.getJSON('{{url('filter/getbranches')}}', function(data) {
-			$("#branch").select2({
-				data: data
-			}).select2('val', 'all');
-			refresh();
+			
+			$.getJSON('{{url('filter/getmonths')}}', function(data) {
+				$("#month").select2({
+					data: data
+				}).select2('val', {{month}});
+				
+				$.getJSON('{{url('filter/getbranches')}}', function(data) {
+					$("#branch").select2({
+						data: data
+					}).select2('val', 'all');
+					refresh();
+				});
+			});
 		});
     });
     
     function refresh() {
-        var obj = createObject();
+        var obj = createObject(false);
         getData{{report.idReport}}(obj);
     }
    
 	function downloadReport() {
-		var obj = createObject();
+		var obj = createObject(true);
 		createReport(obj);
 	}
 		
@@ -78,61 +91,79 @@
             type: "POST",			
             data: {object: object},
             error: function(data){
-                $.gritter.add({class_name: 'gritter-error', title: '<i class="glyphicon glyphicon-exclamation-sign"></i> Error', text: data.responseJSON.message, sticky: false, time: 6000});
+                var notification = new NotificationFx({
+					wrapper : document.body,
+					message : '<p>' + data.responseJSON.message + '</p>',
+					layout : 'growl',
+					effect : 'slide',
+					ttl : 15000,
+					type : 'error'
+				});
+				// show the notification
+				notification.show();
             },
             success: function(data){
                 $('#{{report.idReport}}').children().fadeOut(500, function() {
                     $('#{{report.idReport}}').empty();
                         var array = convertObjectInArray(data.data, false);
 						
-						for (var i = 0; i < array.length; i++) {
-							$('#{{report.idReport}}').append('<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">\n\
-																<div class="panel panel-default">\n\
-																	<div class="panel-body">\n\
-																		<div id="speedo' + array[i].idSalesman + '" style="min-width: 230px; height: 280px; margin: 0 auto"></div>\n\
-																	</div>\n\
+						if (array.length == 0) {
+							$('#{{report.idReport}}').append('<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">\n\
+																<div class="alert alert-warning">\n\
+																	No existen datos con los filtros seleccionados\n\
 																</div>\n\
 															  </div>');
-							var value = Math.round(array[i].sales);
-							var min = Math.round(array[i].min);
-							createSpeedo({
-								container: 'speedo' + array[i].idSalesman,
-								title: array[i].name,
-								min: 0,
-								max: array[i].min,
-								reference: ' Pesos colombianos($)',
-								subtitle: min,
-								value: value,
-								seriesName: 'Ventas'
-							});
+						}
+						else {
+							for (var i = 0; i < array.length; i++) {
+								$('#{{report.idReport}}').append('<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">\n\
+																	<div class="panel panel-default">\n\
+																		<div class="panel-body">\n\
+																			<div id="speedo' + array[i].idSalesman + '" style="min-width: 230px; height: 280px; margin: 0 auto"></div>\n\
+																		</div>\n\
+																	</div>\n\
+																  </div>');
+								var value = Math.round(array[i].sales);
+								var min = Math.round(array[i].min);
+								createSpeedo({
+									container: 'speedo' + array[i].idSalesman,
+									title: array[i].name,
+									min: 0,
+									max: array[i].min,
+									reference: ' Pesos colombianos($)',
+									subtitle: min,
+									value: value,
+									seriesName: 'Ventas'
+								});
+							}
 						}
                 });
             }
         });
     }
 	
-	function createObject() {
-	{% if index is not defined%}
-		var m = $('#month').val();
-        var year = $('#year').val();
-        var branch = $('#branch').val();
-        var month = pad(m, 2);
-        var title = month + '/' + year;
-	{% else %}
+	function createObject(variable) {
+		var download = (variable ? 'true' : 'false');
 		var m = {{month}};
         var year = {{year}};
         var branch = 'all';
         var month = pad(m, 2);
-        var title = month + '/' + year;
+		
+	{% if index is not defined%}
+		m = $('#month').val();
+        year = $('#year').val();
+        branch = $('#branch').val();
+        month = pad(m, 2);
 	{% endif %}
 		
 		var obj = {
 			idReport: {{report.idReport}},
-			module: 'sales',
+			module: '{{report.module}}',
 			year: year,
 			month: month,
 			branch: branch,
-			title: title
+			title: month + '/' + year,
+			download: download
 		};
 		
 		return obj;

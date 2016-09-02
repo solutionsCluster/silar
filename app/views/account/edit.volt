@@ -14,6 +14,15 @@
             $(".select2").select2({
             });
 
+			$("#select2").select2({
+				placeholder: "Select a state"
+            }).on("select2-selecting", function(e) {
+				$('#firebird-version').hide(800);
+				if (e.val === 'firebird') {
+					$('#firebird-version').show(800);
+				}
+			});
+
             $(".bootstrap-switch").bootstrapSwitch({
                 size: 'mini',
                 onColor: 'success',
@@ -148,9 +157,18 @@
 						<span class="required">*</span>Base de datos:
 					</label> 
 					<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-						{{ AccountForm.render('database', {'class': 'select2'}) }}
+						{{ AccountForm.render('database', {'class': 'select2', 'id': 'select2'}) }}
 					</div>
                 </div>
+					
+				<div class="form-group" style="display: {% if account.database == 'firebird' %}block{% else %}none{% endif %};" id="firebird-version">
+					<label class="col-xs-12 col-sm-12 col-md-3 col-lg-3 control-label">
+						<span class="required">*</span>Versión de firebird:  
+					</label> 
+					<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+						{{ AccountForm.render('idFirebird') }}
+					</div>
+				</div>	
 					
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-12 col-md-3 col-lg-3 control-label">

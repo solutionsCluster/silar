@@ -11,7 +11,12 @@ class AccountForm extends Form
     {
 		$this->add(new Select('idCiuu', Ciuu::find(), array(
             'using' => array('idCiuu', 'description'),
-            'class' => 'select2'
+            'class' => 'select2 select'
+        )));
+		
+		$this->add(new Select('idFirebird', Firebird::find(), array(
+            'using' => array('idFirebird', 'version'),
+            'class' => 'select2 select'
         )));
 
         $this->add(new Check('status', array(
@@ -97,7 +102,7 @@ class AccountForm extends Form
         $this->add(new Select('paymentplans[]', Paymentplan::find(), array(
             'using' => array('idPaymentplan', 'name'),
             'multiple' => 'multiple',
-            'class' => 'select2'
+            'class' => 'select2 select'
         )));
 		
 		$this->add(new Select("database", array(

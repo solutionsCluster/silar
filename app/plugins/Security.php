@@ -90,7 +90,8 @@ class Security extends Plugin {
             'session::logout' => array(),
             'session::recoverpassword' => array(),
             'session::resetpassword' => array(),
-            'session::setnewpass' => array(),
+			'session::loginasroot' => array('user' => array('root')),
+			'session::logoutfromroot' => array(),
             'error::index' => array(),
             'error::notavailable' => array(),
             'error::unauthorized' => array(),
@@ -112,7 +113,7 @@ class Security extends Plugin {
             'managment::index' => array('dashboard' => array('read')),
 			
             //Reportes
-            'report::index' => array('report' => array('read')),
+            'report::index' => array('report' => array('read', 'create')),
             'report::new' => array('report' => array('create', 'read')),
             'report::edit' => array('report' => array('read', 'update')),
             'report::delete' => array('report' => array('read', 'delete')),
@@ -152,6 +153,7 @@ class Security extends Plugin {
             'user::edit' => array('user' => array('read', 'update')),
             'user::delete' => array('user' => array('read', 'delete')),
             'user::changepassword' => array('user' => array('read', 'update')),
+            'user::editprofile' => array('user' => array('update')),
 			
             //Image bank
             'imagebank::index' => array('imagebank' => array('read')),
@@ -184,6 +186,10 @@ class Security extends Plugin {
             'api::indexresource' => array('resource' => array('read')),
             'api::editresource' => array('resource' => array('update')),
             'api::deleteresource' => array('resource' => array('delete')),
+			
+			//System
+            'system::index' => array('system' => array('read', 'config')),
+            'system::configure' => array('system' => array('read', 'config')),
         );
 //          }
 //          $this->cache->save('controllermap-cache', $map);
@@ -221,17 +227,18 @@ class Security extends Plugin {
             $user = User::findFirstByIdUser($this->session->get('user-id'));
             if ($user) {
                 $role = $user->role->name;
-                // Inyectar el usuario
-                $this->_dependencyInjector->set('userObject', $user);
-
+                
                 $userefective = new stdClass();
                 $userefective->enable = false;
-
                 $efective = $this->session->get('userefective');
                 if (isset($efective)) {
                     $userefective->enable = true;
+					$role = 'sudo';
+					$user->idRole = 1; 
                 }
-
+				
+				// Inyectar el usuario
+                $this->_dependencyInjector->set('userObject', $user);
                 $this->_dependencyInjector->set('userefective', $userefective);
             }
         }
@@ -244,7 +251,6 @@ class Security extends Plugin {
             'session::logout',
             'session::recoverpassword',
             'session::resetpassword',
-            'session::setnewpass',
             'error::index',
             'error::link',
             'error::notavailable',
@@ -263,7 +269,8 @@ class Security extends Plugin {
                 $this->response->redirect("session/login");
                 return false;
             }
-        } else {
+        } 
+		else {
             $acl = $this->getAcl();
             $this->logger->log("Validando el usuario con rol [$role] en [$resource]");
 
@@ -292,11 +299,11 @@ class Security extends Plugin {
                 }
             }
 
-//			$mapForLoginLikeAnyUser = array('session::loginlikethisuser');
-//			
-//			if (in_array($resource, $mapForLoginLikeAnyUser)) {
-//				$this->session->set('userefective', $user);
-//			}
+			$mapForLoginAsRoot = array('session::loginasroot');
+			
+			if (in_array($resource, $mapForLoginAsRoot)) {
+				$this->session->set('userefective', $user);
+			}
 
             return true;
         }

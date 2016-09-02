@@ -12,7 +12,7 @@ class ErrorController extends \Phalcon\Mvc\Controller
 
     }
     
-    public function linkAction()
+    public function notavailableAction()
     {
 
     }

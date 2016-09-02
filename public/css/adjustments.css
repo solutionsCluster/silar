@@ -62,7 +62,7 @@ body {
 .logo-header {
 	width: 100%;
 	margin-top: 5px;
-	margin-bottom: 8px;
+	/*margin-bottom: 8px;*/
 	position: relative;
 	display: inline-block;
 }
@@ -81,14 +81,15 @@ body {
 
 .app-logo {
 	width: 180px;
-	height: 50px;
+	height: 68px;
 	float: left;
 }
 
 .client-logo{
-	width: 180px;	
-	height: 50px;
+	width: 180px;
+	height: 60px;
 	float: right;
+	padding-top: 6px;
 }
 
 .login-box {
@@ -122,7 +123,7 @@ body {
 
 .principal-logo {
 	width: 140px;
-	height: 40px;
+	height: 45px;
 }
 
 .navbar-brand-adjustment {
@@ -328,7 +329,7 @@ body {
 }
 
 .block-danger {
-	border: 1px solid #d43f3a;
+	border: 1px solid #d43f3a !important;
 	background-color: rgba(212,63,58,0.1);
 }
 
@@ -356,8 +357,8 @@ body {
 }
 
 .block-detail {
-	font-size: 0.8em;
-	font-weight: lighter;
+	font-size: 0.9em;
+	font-weight: 300;
 }
 
 .table-white {

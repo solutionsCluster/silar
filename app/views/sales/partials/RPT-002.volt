@@ -39,19 +39,19 @@
 				$("#year").select2({
 					data: data
 				}).select2('val', {{year}});
-			});
-
-			$.getJSON('{{url('filter/getmonths')}}', function(data) {
-				$("#month").select2({
-					data: data
-				}).select2('val', {{month}});
-			});
-
-			$.getJSON('{{url('filter/getbranches')}}', function(data) {
-				$("#branch").select2({
-					data: data
-				}).select2('val', 'all');
-				refresh();
+				
+				$.getJSON('{{url('filter/getmonths')}}', function(data) {
+					$("#month").select2({
+						data: data
+					}).select2('val', {{month}});
+					
+					$.getJSON('{{url('filter/getbranches')}}', function(data) {
+						$("#branch").select2({
+							data: data
+						}).select2('val', 'all');
+						refresh();
+					});
+				});
 			});
 		});
 	{% else %}
@@ -72,12 +72,20 @@
 			type: "POST",
 			data: {object: object},
 			error: function(data) {
-				$.gritter.add({class_name: 'gritter-error', title: '<i class="glyphicon glyphicon-exclamation-sign"></i> Error', text: data.responseJSON.message, sticky: false, time: 6000});
+				var notification = new NotificationFx({
+					wrapper : document.body,
+					message : '<p>' + data.responseJSON.message + '</p>',
+					layout : 'growl',
+					effect : 'slide',
+					ttl : 15000,
+					type : 'error'
+				});
+				// show the notification
+				notification.show();
 			},
 			success: function(data) {
 				$('#{{report.idReport}}').children().fadeOut(500, function() {
 					$('#{{report.idReport}}').empty();
-					console.log(data);
 					createTable({
 						data: data.data,
 						container: '{{report.idReport}}'
@@ -88,23 +96,22 @@
 	}
 	
 	function createObject() {
-	{% if index is not defined%}
-		var m = $('#month').val();
-		var branch = $('#branch').val();
-		var month = pad(m, 2);
-		var year = $('#year').val();
-		var title = month + '/' + year;
-	{% else %}
 		var m = {{month}};
 		var branch = 'all';
 		var month = pad(m, 2);
 		var year = {{year}};
-		var title = month + '/' + year;
+		
+	{% if index is not defined%}
+		m = $('#month').val();
+		branch = $('#branch').val();
+		month = pad(m, 2);
+		year = $('#year').val();
 	{% endif %}
-	
+		
+		var title = month + '/' + year;
 		var object = {
 			idReport: {{report.idReport}},
-			module: 'sales',
+			module: '{{report.module}}',
 			year: year,
 			month: month,
 			branch: branch,
