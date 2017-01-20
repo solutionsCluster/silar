@@ -42,6 +42,9 @@ class SourceModeler
                 $this->modelRTP002();
                 break;
             
+            case 'RPT-003':
+                $this->modelRTP003();
+                break;
             case 'RS-003':
                 $this->modelRS003();
 				break;
@@ -61,6 +64,10 @@ class SourceModeler
 			case 'RS-007':
                 $this->modelRS007();
 				break;
+
+		case 'RS-008':
+			$this->modelRS008();
+			Break;
 			
 			case 'RP-001':
                 $this->modelRP001();
@@ -131,7 +138,9 @@ class SourceModeler
 		$d->banco = 0;
 		$d->saldo = 0;
 		$d->gastos = 0;
-	
+
+	//	$netsales = 0;
+	//	$utilv = 0;	
 		foreach ($this->data as $data) { 
 			if (isset($data[0]->SALES)) {$netsales = $data[0]->SALES; $d->netSales = number_format($data[0]->SALES);}
 			if (isset($data[0]->UTILV)) {$utilv = $data[0]->UTILV; $d->utilv = number_format($data[0]->UTILV);}	
@@ -141,11 +150,47 @@ class SourceModeler
 			if (isset($data[0]->BANCO)) {$d->banco = number_format($data[0]->BANCO);}
 			if (isset($data[0]->SALDO)) {$d->saldo = number_format($data[0]->SALDO);}
 			if (isset($data[0]->GASTOS)) {$d->gastos = number_format($data[0]->GASTOS);}
-		}
-        
+		
+        	}
 		$d->util = round((($utilv/$netsales) * 100), 2);
+	//	}
         $this->modeled = $d;
     }
+
+
+    private function modelRTP003()
+    {
+		$d = new \stdClass();
+		
+		$d->item = '';
+		$d->descripcion = '';
+		$d->producido = 0;
+		$d->saldoIni = 0;
+		$d->ingDia = 0;
+		$d->saldo = 0;
+		$d->costo = 0;
+		$d->flete = 0;
+		$d->descargue = 0;
+		$d->mermas = 0;
+	  	$d->admin = 0;
+	  	$d->porIva = 0;
+	  	$d->valIva = 0;
+	  	$d->total = 0;
+
+		foreach ($this->data as $data) { 
+			if (isset($data[0]->item)) {$d->item = $data[0]->item;}
+			if (isset($data[0]->descripcion)) {$d->descripcion = $data[0]->descripcion;}	
+//			if (isset($data[0]->CXC)) {$d->cxc = number_format($data[0]->CXC);}
+//			if (isset($data[0]->CXP)) {$d->cxp = number_format($data[0]->CXP);}
+//			if (isset($data[0]->CAJA)) {$d->caja = number_format($data[0]->CAJA);}
+//			if (isset($data[0]->BANCO)) {$d->banco = number_format($data[0]->BANCO);}
+//			if (isset($data[0]->SALDO)) {$d->saldo = number_format($data[0]->SALDO);}
+//			if (isset($data[0]->GASTOS)) {$d->gastos = number_format($data[0]->GASTOS);}
+		
+        	}
+//		$d->util = round((($utilv/$netsales) * 100), 2);	
+        $this->modeled = $d;
+}
 
     private function modelRS003()
     {
@@ -359,7 +404,8 @@ class SourceModeler
 			$this->modeled = $this->data;
 		}
 	}
-	
+
+
 	private function modelRS007()
 	{
 		if ($this->filter['download'] == 'false') {
@@ -384,6 +430,35 @@ class SourceModeler
 			$this->modeled = $this->data;
 		}
 	}
+	
+	private function modelRS008()
+	{
+		$source = array();
+		if ($this->filter['download'] == 'false') {
+//			$this->logger->log(print_r($this->data, true));
+			 foreach($this->data as $data) {
+				$class = \trim($data->DESCGRUPO);
+				$class = (empty($class) ? "INDEFINIDO" : $class);
+
+				if (!isset($source[$class])) {
+					$source[$class]['name'] = $class;
+					$source[$class]['data'] = array(0,0,0,0,0,0,0,0,0,0,0,0);
+					$source[$class]['data'][$data->MES - 1] += round($data->SUM);
+				}
+				else {
+					$source[$class]['data'][$data->MES - 1] += round($data->SUM);;
+				}
+			}
+
+			foreach($source as $s) {
+				$this->modeled[] = $s;
+			}
+		}
+		else if ($this->filter['download'] == 'true') {
+			$this->modeled = $this->data;
+		}
+	}
+
 	
 	private function modelRP001()
 	{

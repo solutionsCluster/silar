@@ -20,7 +20,7 @@ class FirebirdSQLCreator {
     }
 
     public function createSQL($object = false) {
-        switch ($this->report->code) {
+        switch ($this->report->code) { //print($this->report->code); die();
             case 'RPT-001':
                 $this->createRPT001($object);
                 break;
@@ -28,6 +28,10 @@ class FirebirdSQLCreator {
             case 'RPT-002':
                 $this->createRPT002($object);
                 break;
+
+	    case 'RPT-003';
+		$this->createRPT003($object);
+		break;
 
             case 'RS-003':
                 $this->createRS003($object);
@@ -48,28 +52,32 @@ class FirebirdSQLCreator {
             case 'RS-007':
                 $this->createRS007($object);
                 break;
+
+	    case 'RS-008':
+		$this->createRS008($object);
+		break;
 			
-			case 'RP-001':
-				$this->createRP001($object);
+ 	    case 'RP-001':
+		$this->createRP001($object);
                 break;
 			
-			case 'RI-001':
-				$this->createRI001($object);
+   	    case 'RI-001':
+		$this->createRI001($object);
                 break;
 			
-			case 'RI-002':
-				$this->createRI002($object);
+	    case 'RI-002':
+		$this->createRI002($object);
                 break;
 			
-			case 'RI-003':
-				$this->createRI003($object);
+	    case 'RI-003':
+		$this->createRI003($object);
                 break;
 			
-			case 'RI-004':
-				$this->createRI004($object);
+	    case 'RI-004':
+		$this->createRI004($object);
                 break;
 			
-			case 'RI-005':
+	    case 'RI-005':
                 $this->createRI005($object);
                 break;
 			
@@ -222,6 +230,16 @@ class FirebirdSQLCreator {
 		);
     }
 
+    private function createRPT003($object) 
+	{
+//        $between = $this->getBetweenDatesSeparatedByPoints($object['month'], $object['year']);
+//		$branch = ($object['branch'] == 'all' ? "" : " AND oe.id_sucursal = '{$object['branch']}'");
+//		$branch2 = ($object['branch'] == 'all' ? "" : " AND carpro.s = '{$object['branch']}'");
+//		$branch3 = ($object['branch'] == 'all' ? "" : " AND gl.s = '{$object['branch']}'"
+		$this->sql ="SELECT item.item, item.descripcion FROM item WHERE item.item = '010100'";
+    }
+
+
     private function createRS003($object)
 	{
         $between = $this->getBetweenDatesSeparatedByBar($object['year'], $object['month']);
@@ -263,6 +281,28 @@ class FirebirdSQLCreator {
 
 	
 	private function createRS006($object) 
+	{
+//		$between = $this->getBetweenDatesSeparatedByPoints($object['month'], $object['year']);
+		 $r1 = (!$object ? date('Y', time()) : $object['year']);
+        $between = "BETWEEN '01.01.{$r1} 00:00' AND '31.12.{$r1} 00:00'";
+		$branch = ($object['branch'] == 'all' ? "" : " AND OE.id_sucursal = '{$object['branch']}'");
+		$line = ($object['line'] == 'all' ? "" : " AND linea.codlinea = '{$object['line']}'");
+
+		$this->sql = "SELECT EXTRACT(MONTH from oe.fecha) as mes, sysdet.nombre_sucursal, LINEA.codlinea, LINEA.desclinea, GRUPO.codgrupo, GRUPO.descgrupo, SUM((OEDET.PRICE*OEDET.QTYSHIP)-oedet.totaldct)
+					FROM ITEM, OE, OEDET, SYSDET, linea, grupo
+					WHERE (OE.FECHA {$between}) {$branch} {$line}
+						AND OEDET.ID_EMPRESA = OE.ID_EMPRESA
+						AND OEDET.ID_SUCURSAL = OE.ID_SUCURSAL
+						AND OEDET.NUMBER = OE.NUMBER
+						AND OEDET.TIPO = OE.TIPO
+						AND ITEM.ITEM = OEDET.ITEM
+						AND oe.id_empresa=sysdet.e and oe.id_sucursal=sysdet.s
+						AND item.itemmstr=linea.codlinea
+						AND item.itemmstr=grupo.codlinea and item.grupo=grupo.codgrupo
+					GROUP BY mes, sysdet.nombre_sucursal, LINEA.codlinea, LINEA.desclinea, GRUPO.codgrupo, GRUPO.descgrupo";
+	}
+	
+	private function createRS008($object) 
 	{
 //		$between = $this->getBetweenDatesSeparatedByPoints($object['month'], $object['year']);
 		 $r1 = (!$object ? date('Y', time()) : $object['year']);
@@ -473,3 +513,8 @@ class FirebirdSQLCreator {
     }
 
 }
+
+
+
+
+

@@ -121,7 +121,7 @@ class ReportController extends ControllerBase
             }
 	
             try {
-		$sql = $this->getSQL($account, $report, $object); 
+		$sql = $this->getSQL($account, $report, $object); //print_r($sql); die();
                 if (empty($sql)) {
                     return $this->setJsonResponse(array('message' => 'Reporte no encontrado, por favor valide la información'), 404);
                 }
@@ -134,7 +134,7 @@ class ReportController extends ControllerBase
 						$result[] = $this->getResult($account, $s);
 						//print_r($result );
 					}
-	//	die(' hola');	
+//	die(' hola');	
 				}
 				else { 
 					$this->logger->log("SQL: {$sql}");

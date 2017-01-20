@@ -11,7 +11,6 @@ class FilterController extends ControllerBase {
             $fconnector->setAccount($account);
             $fconnector->executeQuery($sql);
             $result = $fconnector->getResult();
-            
             $obj = new stdClass();
             $obj->id = "all";
             $obj->text = "Todas las sucursales";

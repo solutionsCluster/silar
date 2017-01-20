@@ -1,0 +1,476 @@
+# Vim 7.4 generó este archivo "viminfo".
+# Puede editarlo, ¡sólo si tiene cuidado!
+
+# Valor de 'encoding' cuando se escribió este archivo
+*encoding=utf-8
+
+
+# hlsearch on (H) or off (h):
+~h
+# Último Patrón de búsqueda:
+~Msle0~/\<mv\>
+
+# Última cadena de sustitución:
+$
+
+# Historia de Línea de órdenes (de lo más nuevo a lo más antiguo):
+:w
+:q
+:!w
+:wq
+:$
+:!wq
+:1
+:4
+:Q
+:!q
+:q!
+:w!
+:W
+:q::q
+:q:q
+::wq
+::q!
+:q1
+
+# Historia de Cadena de búsqueda (de lo más nuevo a lo más antiguo):
+? \<mv\>
+?//
+
+# Historia de Expresión (de lo más nuevo a lo más antiguo):
+
+# Historia de Línea de entrada (de lo más nuevo a lo más antiguo):
+@[{y(es)},n(o),a(ll),q(uit)] y
+@[{y(es)},n(o),a(ll),q(uit)]
+
+# Historia de Línea de entrada (de lo más nuevo a lo más antiguo):
+
+# Registros:
+"0	LINE	0
+	var out ='';
+	for (var p in data.data){
+		out +=p+':' +data[p] + '\n';
+	}
+	 alert(out);
+"1	LINE	0
+						<td>1</td>\n\
+						<td>2</td>\n\
+						<td>3</td>\n\ 
+						<td>4</td>\n\ 
+						<td>5</td>\n\ 
+						<td>6</td>\n\
+						<td>7</td>\n\
+						<td>8</td>\n\ 
+						<td>9</td>\n\ 
+						<td>10</td>\n\
+						<td>11</td>\n\
+						<td>12</td>\n\ 
+						<td>13</td>\n\ 
+"2	LINE	0
+						<td>$' + data.data.descripcion + '</td>\n\ 
+"3	LINE	0
+						<td>$' + data.data.item + '</td>\n\
+						<td>$' + data.data.descripcion + '</td>\n\ 
+"4	LINE	0
+	                                 <td><strong>Item</strong></td>\n\
+"5	LINE	0
+	                                 <td><strong>Item</strong></td>\n\
+"6	LINE	0
+					  <td><strong>Descripcion</strong></td>\n\
+					  <td><strong>Producido</strong></td>\n\				 
+					  <td><strong>Saldo Inicial del Dia</strong></td>\n\
+					  <td><strong>Ingresos del Dia</strong></td>\n\
+					  <td><strong>Saldo</strong></td>\n\
+					  <td><strong>Costo</strong></td>\n\
+					  <td><strong>Flete</strong></td>\n\
+					  <td><strong>Descargue</strong></td>\n\
+					  <td><strong>Mermas</strong></td>\n\
+					  <td><strong>Administracion</strong></td>\n\
+					  <td><strong>Iva</strong></td>\n\
+					  <td><strong>Valor Iva</strong></td>\n\
+"7	LINE	0
+					  <td><strong>Descripcion</strong></td>\n\
+					  <td><strong>Producido</strong></td>\n\				 
+					  <td><strong>Saldo Inicial del Dia</strong></td>\n\
+					  <td><strong>Ingresos del Dia</strong></td>\n\
+					  <td><strong>Saldo</strong></td>\n\
+					  <td><strong>Costo</strong></td>\n\
+					  <td><strong>Flete</strong></td>\n\
+					  <td><strong>Descargue</strong></td>\n\
+					  <td><strong>Mermas</strong></td>\n\
+					  <td><strong>Administracion</strong></td>\n\
+					  <td><strong>% Iva</strong></td>\n\
+					  <td><strong>Valor Iva</strong></td>\n\
+					  <td><strong>Total</strong></td>\n\				  
+"8	LINE	0
+	                                  <td>$'+ data.data.netSales +'</td>\n\
+"9	LINE	0
+	    [branch] => all
+""-	CHAR	0
+	#
+
+# Marcas en el archivo:
+'0  9  0  /etc/ssmtp/ssmtp.conf
+'1  1  0  /home/tareas/tarea_copia_bd.sh
+'2  1  0  /home/tareas/alertas.sh
+'3  868  0  /var/log/apache2/error.log
+'4  64  0  /var/www/html/alertas/index.php
+'5  122  7  /var/www/html/alertas/index1.php
+'6  37  0  /var/log/apache2/error.log
+'7  36  0  /var/log/apache2/error.log
+'8  12949202  0  /var/log/apache2/error.log
+'9  12949201  0  /var/log/apache2/error.log
+
+# Lista de saltos (el más reciente va primero):
+-'  9  0  /etc/ssmtp/ssmtp.conf
+-'  1  0  /etc/ssmtp/ssmtp.conf
+-'  1  0  /home/tareas/tarea_copia_bd.sh
+-'  1  0  /home/tareas/alertas.sh
+-'  868  0  /var/log/apache2/error.log
+-'  1  0  /var/log/apache2/error.log
+-'  64  0  /var/www/html/alertas/index.php
+-'  1  0  /var/www/html/alertas/index.php
+-'  122  7  /var/www/html/alertas/index1.php
+-'  1  0  /var/www/html/alertas/index1.php
+-'  37  0  /var/log/apache2/error.log
+-'  36  0  /var/log/apache2/error.log
+-'  12949202  0  /var/log/apache2/error.log
+-'  12949201  0  /var/log/apache2/error.log
+-'  12949196  0  /var/log/apache2/error.log
+-'  12949190  0  /var/log/apache2/error.log
+-'  12949166  0  /var/log/apache2/error.log
+-'  12949162  0  /var/log/apache2/error.log
+-'  12949161  0  /var/log/apache2/error.log
+-'  12132  0  /var/log/apache2/error.log
+-'  12129  0  /var/log/apache2/error.log
+-'  245  0  ~/app/misc/FirebirdSQLCreator.php
+-'  1  0  ~/app/misc/FirebirdSQLCreator.php
+-'  1  0  ~/app/misc/ReportController.php
+-'  124  53  ~/app/controllers/ReportController.php
+-'  1  0  ~/app/controllers/ReportController.php
+-'  254  0  ~/app/misc/FirebirdSQLCreator.php
+-'  334  1  ~/public/js/charts/highcharts.js
+-'  1  0  ~/public/js/charts/highcharts.js
+-'  370  37  ~/public/js/charts/highcharts.js
+-'  255  16  ~/public/js/charts/highcharts.js
+-'  371  63  ~/public/js/charts/highcharts.js
+-'  329  20  ~/public/js/charts/highcharts.js
+-'  88  37  ~/app/views/sales/partials/RPT-003.volt
+-'  1  0  ~/app/views/sales/partials/RPT-003.volt
+-'  137  0  ~/public/js/charts/highcharts.js
+-'  33  0  ~/app/views/sales/partials/RPT-003.volt
+-'  1  0  ~/app/views/partials/report-partial.volt
+-'  21  0  ~/app/views/sales/showreport.volt
+-'  1  0  ~/app/views/sales/showreport.volt
+-'  74  21  ~/app/misc/FirebirdSQLCreator.php
+-'  156  0  ~/app/controllers/ReportController.php
+-'  1  34  /home/tareas/copia_zoomarcanes.sh
+-'  1  0  /tmp/crontab.vv0rDt/crontab
+-'  7  0  /home/tareas/copia_zoomarcanes.sh
+-'  3  0  /home/tareas/copia_zoomarcanes.sh
+-'  1  0  /tmp/crontab.l9phCQ/crontab
+-'  26  23  /tmp/crontab.DFrznd/crontab
+-'  1  0  /tmp/crontab.DFrznd/crontab
+-'  24  0  /tmp/crontab.wMYEmh/crontab
+-'  1  0  /tmp/crontab.wMYEmh/crontab
+-'  12  0  ~/app/logs/[Command Line]
+-'  1  0  ~/app/logs/debug.log
+-'  10585  116  ~/app/logs/debug.log
+-'  10619  116  ~/app/logs/debug.log
+-'  9319  0  ~/app/logs/debug.log
+-'  7382  0  ~/app/logs/debug.log
+-'  6132  0  ~/app/logs/debug.log
+-'  6148  0  ~/app/logs/debug.log
+-'  5792  4  ~/app/logs/debug.log
+-'  4867  0  ~/app/logs/debug.log
+-'  1374  0  ~/app/logs/debug.log
+-'  723  0  ~/app/logs/debug.log
+-'  407  0  ~/app/logs/debug.log
+-'  24904  0  /var/log/apache2/error.log
+-'  5385  0  /var/log/apache2/error.log
+-'  23  3  /tmp/crontab.EN1M5b/crontab
+-'  1  0  /tmp/crontab.EN1M5b/crontab
+-'  1  0  ~/app/logs/debug
+-'  155  16  ~/app/controllers/ReportController.php
+-'  111  0  ~/app/misc/SourceModeler.php
+-'  1  0  ~/app/misc/SourceModeler.php
+-'  28  0  ~/app/controllers/ControllerBase.php
+-'  1  0  ~/app/controllers/ControllerBase.php
+-'  148  0  ~/app/controllers/ReportController.php
+-'  35  1  ~/app/controllers/SalesController.php
+-'  1  0  ~/app/controllers/SalesController.php
+-'  26  6  ~/app/controllers/SalesController.php
+-'  146  1  ~/app/controllers/ReportController.php
+-'  35  7  ~/app/controllers/ControllerBase.php
+-'  128  0  ~/app/controllers/ReportController.php
+-'  88  2  ~/app/misc/SourceModeler.php
+-'  143  1  ~/app/controllers/ReportController.php
+-'  137  102  ~/app/misc/SourceModeler.php
+-'  23  5  /tmp/crontab.liY1XD/crontab
+-'  1  0  /tmp/crontab.liY1XD/crontab
+-'  23  1  /tmp/crontab.mZxBzu/crontab
+-'  1  0  /tmp/crontab.mZxBzu/crontab
+-'  23  0  /tmp/crontab.i3FO5X/crontab
+-'  1  0  /tmp/crontab.i3FO5X/crontab
+-'  23  4  /tmp/crontab.LbXceU/crontab
+-'  1  0  /tmp/crontab.LbXceU/crontab
+-'  1  0  /tmp/crontab.weGlAg/crontab
+-'  1  0  /tmp/crontab.GkSy7T/crontab
+-'  136  16  ~/app/misc/SourceModeler.php
+-'  132  10  ~/app/misc/SourceModeler.php
+-'  134  19  ~/app/misc/SourceModeler.php
+-'  9  38  /home/tareas/tarea_copia_bd.sh
+-'  12  41  /home/tareas/tarea_copia_bd.sh
+
+# Historia de las marcas en los archivos (de la más reciente a la más antigua):
+
+> /etc/ssmtp/ssmtp.conf
+	"	9	0
+	^	7	1
+	.	7	0
+	+	7	0
+
+> /etc/mailname
+	"	1	0
+
+> /etc/mail/local-host-names
+	"	1	0
+
+> /etc/mail/mailname
+	"	1	0
+
+> /etc/mail/sendmail.mc
+	"	104	0
+
+> /etc/mail/sendmail.conf
+	"	310	0
+
+> /etc/hosts
+	"	1	0
+
+> /etc/host.conf
+	"	1	0
+
+> /etc/hostname
+	"	1	0
+
+> /home/tareas/tarea_copia_bd.sh
+	"	1	0
+
+> /home/tareas/alertas.sh
+	"	1	0
+
+> /var/log/apache2/error.log
+	"	868	0
+
+> /var/www/html/alertas/index.php
+	"	64	0
+	^	115	43
+	.	115	42
+	+	115	42
+
+> /var/www/html/alertas/index1.php
+	"	122	7
+	^	112	0
+	.	233	1
+	+	125	0
+	+	137	0
+	+	139	1
+	+	266	1
+	+	233	1
+
+> ~/app/misc/FirebirdSQLCreator.php
+	"	245	0
+	^	235	2
+	.	235	0
+	+	234	87
+	+	235	15
+	+	235	80
+	+	234	83
+	+	234	83
+	+	234	83
+	+	235	0
+	+	234	83
+	+	235	87
+	+	235	2
+	+	231	1
+	+	232	1
+	+	233	1
+	+	234	1
+	+	235	87
+	+	235	0
+
+> ~/app/misc/ReportController.php
+	"	1	0
+
+> ~/app/controllers/ReportController.php
+	"	124	53
+	^	124	54
+	.	124	53
+	+	137	1
+	+	107	39
+	+	118	0
+	+	124	53
+
+> ~/public/js/charts/highcharts.js
+	"	334	1
+	^	334	2
+	.	334	1
+	+	353	0
+	+	341	44
+	+	341	45
+	+	341	59
+	+	342	8
+	+	341	72
+	+	342	25
+	+	343	65
+	+	344	60
+	+	345	49
+	+	346	49
+	+	347	49
+	+	348	53
+	+	349	45
+	+	350	58
+	+	351	47
+	+	352	53
+	+	353	49
+	+	371	32
+	+	371	64
+	+	371	43
+	+	371	72
+	+	371	32
+	+	371	39
+	+	371	39
+	+	371	44
+	+	371	39
+	+	371	39
+	+	371	39
+	+	371	39
+	+	371	39
+	+	371	44
+	+	371	39
+	+	371	44
+	+	371	32
+	+	371	39
+	+	371	48
+	+	371	48
+	+	371	48
+	+	371	48
+	+	371	48
+	+	371	48
+	+	371	48
+	+	371	48
+	+	371	48
+	+	371	49
+	+	371	49
+	+	371	49
+	+	371	59
+	+	371	39
+	+	371	32
+	+	371	32
+	+	371	27
+	+	354	32
+	+	355	3
+	+	354	39
+	+	370	40
+	+	356	57
+	+	329	45
+	+	273	27
+	+	330	12
+	+	333	0
+	+	334	7
+	+	335	0
+	+	334	9
+	+	274	0
+	+	274	0
+	+	274	22
+	+	274	0
+	+	281	0
+	+	281	0
+	+	331	22
+	+	275	0
+	+	276	0
+	+	276	0
+	+	275	1
+	+	280	13
+	+	334	16
+	+	333	2
+	+	330	1
+	+	356	37
+	+	357	37
+	+	358	9
+	+	359	37
+	+	360	37
+	+	361	37
+	+	362	37
+	+	359	37
+	+	360	37
+	+	361	37
+	+	362	37
+	+	363	37
+	+	364	37
+	+	365	37
+	+	366	37
+	+	367	37
+	+	368	37
+	+	369	37
+	+	370	37
+	+	334	1
+
+> ~/app/misc/SourceModeler.php
+	"	187	1
+	^	187	2
+	.	187	1
+	+	45	24
+	+	46	34
+	+	156	0
+	+	157	0
+	+	189	0
+	+	187	50
+	+	188	0
+	+	169	17
+	+	157	31
+	+	161	9
+	+	162	16
+	+	161	14
+	+	162	21
+	+	163	14
+	+	164	13
+	+	165	11
+	+	166	10
+	+	167	10
+	+	168	10
+	+	169	14
+	+	170	0
+	+	171	0
+	+	170	14
+	+	171	2
+	+	172	0
+	+	173	0
+	+	174	0
+	+	172	13
+	+	173	13
+	+	174	12
+	+	177	56
+	+	178	76
+	+	179	1
+	+	180	1
+	+	181	1
+	+	182	1
+	+	183	1
+	+	184	1
+	+	187	1
+	e	170	6
+
+> ~/app/views/sales/partials/RPT-003.volt.php
+	"	105	0
+
+> ~/app/views/sales/partials/RPT-003.volt
+	"	105	0
+	^	89	17
+	.	89	16
+	+	91	18
+	+	90	0
+	+	89	0
+	+	88	38
+	+	89	16

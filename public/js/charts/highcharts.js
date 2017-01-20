@@ -270,7 +270,14 @@ function createBasicBar(data) {
     });
 }
 
-function createTable(data) {
+function createTable(data){
+
+/*var out ='';
+
+for (var p in data.data){
+	out +=p+':' +data[p] + '\n';
+}
+ alert(out);*/
     var table = $('<div class="table-responsive">\n\
                         <table class="table table-bordered">\n\
                           <thead></thead>\n\
@@ -317,6 +324,57 @@ function createTable(data) {
 
     $('#' + data.container).append(table);
 }
+
+
+function createTable1(data) {
+/*var out ='';
+for (var p in data.data){
+	out +=p+':' +data[p] + '\n';
+}*/
+// alert(data.data.item);
+    var table1 = $('<div class="table-responsive">\n\
+                        <table class="table table-bordered">\n\
+                          <thead></thead>\n\
+                          <tbody>\n\
+                                <tr>\n\
+                                 <td><strong>Item</strong></td>\n\
+                                 <td><strong>Descripcion</strong></td>\n\
+				 <td><strong>Producido</strong></td>\n\
+                                 <td><strong>Saldo Inicial del Dia</strong></td>\n\
+                                 <td><strong>Ingresos del Dia</strong></td>\n\
+                                 <td><strong>Saldo</strong></td>\n\
+                                 <td><strong>Costo</strong></td>\n\
+                                 <td><strong>Flete</strong></td>\n\
+                                 <td><strong>Descargue</strong></td>\n\
+                                 <td><strong>Mermas</strong></td>\n\
+                                 <td><strong>Administracion</strong></td>\n\
+                                 <td><strong>% Iva</strong></td>\n\
+                                 <td><strong>Valor Iva</strong></td>\n\
+                                 <td><strong>Total</strong></td>\n\
+                                </tr>\n\
+				<tr>\n\
+                                 <td>'+ data.data.item +'</td>\n\
+                                 <td></td>\n\
+				 <td></td>\n\
+                                 <td></td>\n\
+                                 <td></td>\n\
+                                 <td></td>\n\
+                                 <td></td>\n\
+                                 <td></td>\n\
+                                 <td></td>\n\
+                                 <td></td>\n\
+                                 <td></td>\n\
+                                 <td></td>\n\
+                                 <td></td>\n\
+                                 <td></td>\n\
+                                </tr>\n\
+                           </tbody>\n\
+                        </table>\n\
+                  </div>');
+
+    $('#' + data.container).append(table1);
+}
+
 
 function pad (str, max) {
 	str = str.toString();

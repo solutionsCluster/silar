@@ -29,14 +29,19 @@ class ControllerBase extends \Phalcon\Mvc\Controller
             $this->response->setStatusCode($status, $message);
         }
         
-        if (is_array($content)) {// print('1..');
-            $content = json_encode($content);// print_r($content); die();
+        if (is_array($content)) { 
+		$this->logger->log(print_r($content, true));           
+//		$content = $this->utf8_converter($content);
+	       $content = json_encode($content);
+//		$this->logger->log("content1: {$content}");
+
         }
         
         $this->response->setContent($content);
         return $this->response;
     }
-        
+
+       
     /**
      * Retorna el contenido POST de un Request desde 
      * un objeto inyectado o directamente desde el request

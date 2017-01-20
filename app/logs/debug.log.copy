@@ -1,0 +1,280 @@
+[Fri, 29 Jul 16 10:35:12 -0500][DEBUG] Validando el usuario con rol [sudo] en [session::login]
+[Fri, 29 Jul 16 10:35:15 -0500][DEBUG] Validando el usuario con rol [sudo] en [session::validatesession]
+[Fri, 29 Jul 16 10:35:15 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Fri, 29 Jul 16 10:35:17 -0500][DEBUG] Validando el usuario con rol [sudo] en [managment::index]
+[Fri, 29 Jul 16 10:35:19 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::index]
+[Fri, 29 Jul 16 10:35:24 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Fri, 29 Jul 16 10:35:25 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Fri, 29 Jul 16 12:23:11 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Fri, 29 Jul 16 14:31:10 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Fri, 29 Jul 16 14:31:13 -0500][DEBUG] Validando el usuario con rol [sudo] en [managment::index]
+[Fri, 29 Jul 16 14:31:15 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::index]
+[Fri, 29 Jul 16 14:31:18 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Fri, 29 Jul 16 14:31:19 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Wed, 03 Aug 16 17:50:15 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:20:38 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:52:25 -0500][DEBUG] Validando el usuario con rol [sudo] en [session::login]
+[Thu, 04 Aug 16 14:52:38 -0500][DEBUG] Validando el usuario con rol [sudo] en [session::validatesession]
+[Thu, 04 Aug 16 14:52:39 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:52:42 -0500][DEBUG] Validando el usuario con rol [sudo] en [managment::index]
+[Thu, 04 Aug 16 14:52:46 -0500][DEBUG] Validando el usuario con rol [sudo] en [paymentplan::index]
+[Thu, 04 Aug 16 14:52:49 -0500][DEBUG] Validando el usuario con rol [sudo] en [managment::index]
+[Thu, 04 Aug 16 14:52:50 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::index]
+[Thu, 04 Aug 16 14:52:53 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 14:52:53 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:53:04 -0500][DEBUG] Validando el usuario con rol [sudo] en [session::login]
+[Thu, 04 Aug 16 14:53:05 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::index]
+[Thu, 04 Aug 16 14:53:10 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 14:53:10 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:53:13 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:53:34 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 14:53:35 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:53:45 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 14:53:45 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:53:47 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:53:51 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:53:57 -0500][DEBUG] Validando el usuario con rol [sudo] en [inventories::index]
+[Thu, 04 Aug 16 14:53:59 -0500][DEBUG] Validando el usuario con rol [sudo] en [managment::index]
+[Thu, 04 Aug 16 14:54:00 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::index]
+[Thu, 04 Aug 16 14:54:04 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 14:54:04 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:54:09 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 14:54:14 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 15:03:55 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 15:03:56 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 15:14:25 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 15:14:29 -0500][DEBUG] Validando el usuario con rol [sudo] en [managment::index]
+[Thu, 04 Aug 16 15:14:31 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 15:14:34 -0500][DEBUG] Validando el usuario con rol [sudo] en [managment::index]
+[Thu, 04 Aug 16 15:14:35 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::index]
+[Thu, 04 Aug 16 15:14:39 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 15:14:42 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 15:14:42 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token END, near to ' AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS start, a.end AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (210)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('6')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 15:14:42 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 15:15:11 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 15:15:15 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 15:15:15 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token END, near to ' AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS start, a.end AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (210)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('6')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 15:15:15 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 15:16:59 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 15:17:03 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 15:17:03 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token END, near to ' AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS start, a.end AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (210)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('6')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 15:17:03 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 16:11:35 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 16:11:36 -0500][DEBUG] Validando el usuario con rol [sudo] en [managment::index]
+[Thu, 04 Aug 16 16:11:37 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::index]
+[Thu, 04 Aug 16 16:11:39 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 16:11:40 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 16:11:40 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token END, near to ' AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS start, a.end AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (210)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('1')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 16:11:40 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 16:11:45 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::index]
+[Thu, 04 Aug 16 16:11:47 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 16:12:55 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 16:12:55 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token END, near to ' AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS start, a.end AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (210)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('1')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 16:14:32 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 16:14:32 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 16:14:32 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token END, near to ' AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS start, a.end AS end, a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (210)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('1')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 16:14:32 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 16:34:46 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 16:34:49 -0500][DEBUG] Validando el usuario con rol [sudo] en [managment::index]
+[Thu, 04 Aug 16 16:34:50 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::index]
+[Thu, 04 Aug 16 16:34:54 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 16:34:55 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 16:34:55 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token STRING(start), near to ', a.end AS 'end', a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS 'start', a.end AS 'end', a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (214)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('6')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 16:34:55 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+'SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('1')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 16:35:04 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 16:35:04 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token STRING(start), near to ', a.end AS 'end', a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS 'start', a.end AS 'end', a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (214)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('1')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 16:35:05 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 16:35:05 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token STRING(start), near to ', a.end AS 'end', a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS 'start', a.end AS 'end', a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (214)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('1')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 16:35:06 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 16:35:06 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token STRING(start), near to ', a.end AS 'end', a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS 'start', a.end AS 'end', a.status AS status
+					FROM Pxa AS a
+						JOIN Paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (214)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('1')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 16:44:47 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 16:44:50 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 16:44:50 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token STRING(start), near to ', a.end AS 'end', a.status AS status
+					FROM pxa AS a
+						JOIN paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS 'start', a.end AS 'end', a.status AS status
+					FROM pxa AS a
+						JOIN paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (214)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('6')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 16:44:50 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 16:50:56 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 16:50:59 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 16:50:59 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Syntax error, unexpected token END, near to ' AS fin, a.status AS status
+					FROM pxa AS a
+						JOIN paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id:', when parsing: SELECT p.idPaymentplan AS id, p.name AS name, a.start AS inicio, a.end AS fin, a.status AS status
+					FROM pxa AS a
+						JOIN paymentplan AS p ON p.idPaymentplan = a.idPaymentplan
+					WHERE a.idAccount = :id: (211)' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#1 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#2 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#3 [internal function]: AccountController->getpaymentsplanAction('6')
+#4 [internal function]: Phalcon\Dispatcher->dispatch()
+#5 /home/silar/public/index.php(218): Phalcon\Mvc\Application->handle()
+#6 {main}
+[Thu, 04 Aug 16 16:50:59 -0500][DEBUG] Validando el usuario con rol [sudo] en [index::index]
+[Thu, 04 Aug 16 16:56:24 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::addpaymentplan]
+[Thu, 04 Aug 16 16:56:26 -0500][DEBUG] Validando el usuario con rol [sudo] en [account::getpaymentsplan]
+[Thu, 04 Aug 16 16:56:26 -0500][DEBUG] Exception... exception 'Phalcon\Mvc\Model\Exception' with message 'Model 'pxa' could not be loaded' in /home/silar/app/controllers/AccountController.php:368
+Stack trace:
+#0 [internal function]: Phalcon\Mvc\Model\Manager->load('pxa', true)
+#1 [internal function]: Phalcon\Mvc\Model\Query->_prepareSelect()
+#2 [internal function]: Phalcon\Mvc\Model\Query->parse()
+#3 [internal function]: Phalcon\Mvc\Model\Query->execute()
+#4 /home/silar/app/controllers/AccountController.php(368): Phalcon\Mvc\Model\Manager->executeQuery('SELECT p.idPaym...', Array)
+#5 [internal function]: AccountController->getpaymentsplanAction('6')

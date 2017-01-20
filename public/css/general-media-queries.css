@@ -1,0 +1,73 @@
+/* 
+    Document   : general-media-queries
+    Created on : 6/03/2015, 10:20:56 AM
+    Author     : Will
+    Description:
+        Purpose of the stylesheet follows.
+*/
+@media (min-width: 1318px) and (max-width: 1366px) {
+	.ad {
+		width: 1024px;
+	}
+}
+
+@media (min-width: 1251px) and (max-width: 1317px) {
+	.ad {
+		width: 950px;
+	}
+}
+
+@media (min-width: 1180px) and (max-width: 1250px) {
+	.ad {
+		width: 850px;
+	}
+}
+
+
+@media (min-width: 1050px) and (max-width: 1179px) {
+	.ad {
+		width: 800px;
+	}
+}
+
+@media (min-width: 940px) and (max-width: 1049px) {
+	.ad {
+		width: 700px;
+	}
+}
+
+@media (min-width: 810px) and (max-width: 939px) {
+	.ad {
+		width: 600px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 809px) {
+	.ad {
+		width: 500px;
+	}
+}
+
+@media (min-width: 725px) and (max-width: 767px) {
+	.ad {
+		width: 650px;
+	}
+}
+
+@media (min-width: 635px) and (max-width: 724px) {
+	.ad {
+		width: 540px;
+	}
+}
+
+@media (min-width: 566px) and (max-width: 634px) {
+	.ad {
+		width: 480px;
+	}
+}
+
+@media (min-width: 400px) and (max-width: 565px) {
+	.ad {
+		width: 470px;
+	}
+}
